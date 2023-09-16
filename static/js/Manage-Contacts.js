@@ -167,12 +167,12 @@ updateCustomerBtn.addEventListener("click", ()=>{
         if (!phone == "")
             updatedUser.phone = phone
         updatedUser.id = id
-        updatedUser.is_supplier = (is_supplier == "True")? 1: 0
-        updatedUser.is_customer = (is_customer == "True")? 1: 0
+        updatedUser.is_supplier = is_supplier
+        updatedUser.is_customer = is_customer
 
         console.log(updatedUser)
 
-        let url = `${SERVER_IP}/udpate-contact`
+        let url = `${SERVER_IP}/manage-contacts/update-contact`
         fetch(url, {
             method: 'POST',
             headers: {

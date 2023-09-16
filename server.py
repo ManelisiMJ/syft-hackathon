@@ -7,7 +7,6 @@ from flask_cors import CORS, cross_origin
 
 db_name = "JCupcakeCompany.sqlite"
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 def createContactsDictionary(contacts):
     data_dict_list = []
@@ -100,10 +99,8 @@ def newContact():
         conn.close()
         return jsonify("failure")
 
-@app.route('/update-contact', methods=['POST'])
-@cross_origin
+@app.route('/manage-contacts/update-contact', methods=['POST'])
 def updateContact():
-    print("Endpoint hit")
     newUser = request.get_json()
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
