@@ -45,7 +45,7 @@ def populate_contact_table():
     # Insert data into the table
     for contact in data["data"]:
         cursor.execute("INSERT OR REPLACE INTO Contact (id, name, is_supplier, is_customer, email, phone) VALUES (?, ?, ?, ?, ?, ?)",
-                       (contact['id'], contact['name'], str(contact['is_supplier']), str(contact['is_customer']), contact['email'], contact['phone']))
+                       (contact['id'], contact['name'], int(contact['is_supplier']), int(contact['is_customer']), contact['email'], contact['phone']))
 
     conn.commit()
     conn.close()
@@ -135,7 +135,7 @@ def populate_payment_allocations_table():
 ##################################################################################################################################################################
 
 if __name__ == "__main__":
-    create_table("Contact", ["id TEXT PRIMARY KEY","name TEXT","is_supplier TEXT","is_customer TEXT","email TEXT","phone TEXT"])
+    create_table("Contact", ["id TEXT PRIMARY KEY","name TEXT","is_supplier INTEGER","is_customer INTEGER","email TEXT","phone TEXT"])
 
     create_table("Item", ["id TEXT", "name TEXT", "code TEXT PRIMARY KEY", "quantity_on_hand INTEGER", "purchase_unit_price REAL", "sale_unit_price REAL"])
 

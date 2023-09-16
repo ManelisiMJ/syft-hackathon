@@ -54,7 +54,13 @@
             <input id="id" type="text">
           </div>
           <div class="u-clearfix u-custom-html u-custom-html-2">
-            <input id="role" type="text">
+            <select name="role" id="role" style="width: 170px; height: 32px;">
+              <option value=""></option>
+              <option value="Customer">Customer</option>
+              <option value="Supplier">Supplier</option>
+              <option value="Both">Customer & Supplier</option>
+              <option value="None">Neither</option>
+            </select>
           </div>
           <div class="u-clearfix u-custom-html u-custom-html-3">
             <input id="email" type="text">
@@ -77,7 +83,7 @@
     <section class="u-align-center u-clearfix u-section-2" id="sec-5d0e">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h3 class="u-text u-text-default u-text-1" style="margin-top: 20px;">Business Contacts</h3>
-        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
           <table class="u-table-entity u-table-entity-1">
             <colgroup>
               <col width="16.6%">
@@ -97,15 +103,8 @@
                 <th class="u-border-1 u-border-black u-table-cell">Is_Suppler</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
-              <tr style="height: 76px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-              </tr>
+            <tbody id="contacts-table" class="u-table-body">
+              
             </tbody>
           </table>
         </div>
@@ -132,11 +131,17 @@
       </div>
       <h6 class="u-text u-text-default u-text-5">Is_Customer</h6>
       <div class="u-clearfix u-custom-html u-custom-html-5">
-        <input id="new-is-customer" type="text">
+        <select name="new-is-customer" id="new-is-customer" style="width: 170px; height: 32px;">
+          <option value="1">True</option>
+          <option value="0">False</option>
+        </select>
       </div>
-      <h6 class="u-text u-text-default u-text-6">Is_Supplier</h6>
+      <h6 class="u-text u-text-default u-text-6">Is-Supplier</h6>
       <div class="u-clearfix u-custom-html u-custom-html-6">
-        <input id="new-is-suppler" type="text">
+        <select name="new-is-supplier" id="new-is-supplier" style="width: 170px; height: 32px;">
+          <option value="1">True</option>
+          <option value="0">False</option>
+        </select>
       </div>
       <button id="update" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">update details</button>
       <button id="new" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-base u-palette-4-light-1 u-radius-50 u-btn-2">new contact</button>
