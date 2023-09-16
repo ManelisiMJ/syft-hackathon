@@ -5,29 +5,19 @@
     <meta name="keywords" content="Invoice">
     <meta name="description" content="">
     <title>Record Invoice</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Record-Invoice.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Record-Invoice.css') }}" media="screen">
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jcupcakecompany.js') }}" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">   
     
-    
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "",
-		"logo": "images/logo.jpg"
-}</script>
     <meta name="theme-color" content="#498fd0">
     <meta property="og:title" content="Record Invoice">
     <meta property="og:type" content="website">
   <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-a257"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
-          <img src="images/logo.jpg" class="u-logo-image u-logo-image-1">
+        <a href="" class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
+          <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="u-logo-image u-logo-image-1">
         </a>
         <p class="u-custom-font u-heading-font u-text u-text-default u-text-palette-1-base u-text-1">J's Cupcake Company </p>
         <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
@@ -39,16 +29,16 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home.html" style="padding: 18px 34px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Apps.html" style="padding: 18px 34px;">Apps</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Home</span>
+</li><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Apps</span>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Apps.html">Apps</a>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><span class="u-button-style u-nav-link">Home</span>
+</li><li class="u-nav-item"><span class="u-button-style u-nav-link">Apps</span>
 </li></ul>
               </div>
             </div>
@@ -94,25 +84,15 @@
         <h6 class="u-text u-text-3">Description</h6>
         <h6 class="u-text u-text-4">Total</h6>
         <h6 class="u-text u-text-5">Quantity</h6>
-        <a href="https://nicepage.com/landing-page" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">add line item</a>
+        <a href="" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">add line item</a>
       </div>
     </section>
     
-    
-    
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8"><div class="u-clearfix u-sheet u-sheet-1">
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8">
+      <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">SAP@J's Cupcake Company | Ncube Manelisi</p>
-      </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
-  
+      </div>
+    </footer>
+
+    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Record-Invoice.js') }}"></script>
 </body></html>

@@ -5,16 +5,12 @@
     <meta name="keywords" content="Here&amp;apos;s some of your data">
     <meta name="description" content="">
     <title>Home</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Home.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Home.css') }}" media="screen">
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jcupcakecompany.js') }}" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    
-    
+
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -26,8 +22,8 @@
     <meta property="og:type" content="website">
   <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-a257"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
-          <img src="images/logo.jpg" class="u-logo-image u-logo-image-1">
+        <a href="" class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
+          <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="u-logo-image u-logo-image-1">
         </a>
         <p class="u-custom-font u-heading-font u-text u-text-default u-text-palette-1-base u-text-1">J's Cupcake Company </p>
         <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
@@ -39,8 +35,8 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home.html" style="padding: 18px 34px;">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Apps.html" style="padding: 18px 34px;">Apps</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Home</a>
+</li><li class="u-nav-item"><span id="apps" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Apps.html" style="padding: 18px 34px;">Apps</span>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -67,7 +63,7 @@
           <div class="u-carousel-inner u-gallery-inner" role="listbox">
             <div class="u-active u-carousel-item u-effect-fade u-gallery-item u-carousel-item-1">
               <div class="u-back-slide" data-image-width="6912" data-image-height="3456">
-                <img class="u-back-image u-expanded" src="images/carousel-1.webp">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='images/carousel-1.jpg') }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1">
                 <h3 class="u-gallery-heading">SAP Enterprise Resource Planning System</h3>
@@ -76,7 +72,7 @@
             </div>
             <div class="u-carousel-item u-effect-fade u-gallery-item u-carousel-item-2">
               <div class="u-back-slide" data-image-width="1280" data-image-height="854">
-                <img class="u-back-image u-expanded" src="images/2c404c7bf7ed6edc219d7f12b3bdf96a2314446e3085da96b741b7e626333f8d3ea9dfd3bdda812c0d612d4ee05aa3cc9d3d3b55d7752846038fc4_1280.jpg">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='images/2c404c7bf7ed6edc219d7f12b3bdf96a2314446e3085da96b741b7e626333f8d3ea9dfd3bdda812c0d612d4ee05aa3cc9d3d3b55d7752846038fc4_1280.jpg') }}">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2">
                 <h3 class="u-gallery-heading">Real Time Data</h3>
@@ -85,7 +81,7 @@
             </div>
             <div class="u-carousel-item u-effect-fade u-gallery-item u-carousel-item-3" data-image-width="1280" data-image-height="850">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="images/ced506f649a3beea310ca7afc55e2bd0bdfa5f3bbf8ccbff9727cbf30f62698225e440a429a4dce2ca72de5c005d29e259072581ccd04fdb835b26_1280.jpg" alt="">
+                <img class="u-back-image u-expanded" src="{{ url_for('static', filename='images/ced506f649a3beea310ca7afc55e2bd0bdfa5f3bbf8ccbff9727cbf30f62698225e440a429a4dce2ca72de5c005d29e259072581ccd04fdb835b26_1280.jpg') }}" alt="">
               </div>
               <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-3">
                 <p class="u-gallery-text">Increase the speed, effeciency and quality of your business operations, while cutting costs</p>
@@ -129,21 +125,9 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
       <div class="u-clearfix u-sheet u-valign-top u-sheet-1"></div>
     </section>
     
-    
-    
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">SAP@J's Cupcake Company | Ncube Manelisi</p>
-      </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
-  
+      </div>
+    </footer>
+    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Home.js') }}" defer=""></script>
 </body></html>
