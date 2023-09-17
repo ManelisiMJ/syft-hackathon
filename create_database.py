@@ -2,6 +2,7 @@ import sqlite3
 import requests
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 db_name = "JCupcakeCompany.sqlite"
 load_dotenv()
@@ -69,15 +70,15 @@ def populate_item_table():
 
 def populate_invoice_table():
     data = fetch_data("invoice")
-    
+
     conn = sqlite3.connect(db_name)
     cursor = conn.cursor()
 
     # Insert data into the table
     for invoice in data["data"]:
         cursor.execute("INSERT OR REPLACE INTO Invoice (id, issue_date, due_date, paid_date, paid, contact_id, total, amount_due, exchange_rate, currency, is_sale) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        (invoice['id'], invoice['issue_date'], invoice["due_date"], invoice["paid_date"], str(invoice['paid']), str(invoice['contact_id']), 
-        float(invoice['total']), float(invoice['amount_due']), float(invoice['exchange_rate']), invoice['currency'], str(invoice["is_sale"])))
+        (invoice['id'], invoice['issue_date'], invoice["due_date"], invoice["paid_date"], int(invoice['paid']), invoice['contact_id'], float(invoice['total']), float(invoice['amount_due']),
+        float(invoice['exchange_rate']), invoice['currency'], int(invoice["is_sale"])))
 
     conn.commit()
     conn.close()
@@ -111,7 +112,7 @@ def populate_payment_table():
     # Insert data into the table
     for payment in data["data"]:
         cursor.execute("INSERT OR REPLACE INTO Payment (id, date, contact_id, total, exchange_rate, is_income) VALUES (?, ?, ?, ?, ?, ?)",
-        (payment['id'], payment['date'], payment['contact_id'], float(payment['total']), float(payment['exchange_rate']), str(payment['is_income'])))
+        (payment['id'], payment['date'], payment['contact_id'], float(payment['total']), float(payment['exchange_rate']), int(payment['is_income'])))
 
     conn.commit()
     conn.close()
@@ -139,14 +140,13 @@ if __name__ == "__main__":
 
     create_table("Item", ["id TEXT", "name TEXT", "code TEXT PRIMARY KEY", "quantity_on_hand INTEGER", "purchase_unit_price REAL", "sale_unit_price REAL"])
 
-    create_table("Invoice", ["id TEXT PRIMARY KEY","issue_date TEXT","due_date TEXT","paid_date TEXT","paid TEXT","contact_id TEXT","total REAL","amount_due REAL","exchange_rate REAL","currency TEXT", "is_sale TEXT",
+    create_table("Invoice", ["id TEXT PRIMARY KEY","issue_date TEXT","due_date TEXT","paid_date TEXT","paid INTEGER","contact_id TEXT","total REAL","amount_due REAL","exchange_rate REAL","currency TEXT", "is_sale INTEGER",
      "FOREIGN KEY (contact_id) REFERENCES Contact (id)"])
 
-    create_table("InvoiceLine", ["id TEXT PRIMARY KEY", "invoice_id TEXT", "description TEXT", "item_code TEXT", "total REAL", "quantity INTEGER"], [
-        "FOREIGN KEY (invoice_id) REFERENCES Invoice (id)",
-        "FOREIGN KEY (item_code) REFERENCES Item (code)"
-    ])
-    create_table("Payment", ["id TEXT PRIMARY KEY", "date TEXT", "contact_id TEXT", "total REAL", "exchange_rate REAL", "is_income TEXT",
+    create_table("InvoiceLine", ["id TEXT PRIMARY KEY", "invoice_id TEXT", "description TEXT", "item_code TEXT", "total REAL", "quantity INTEGER"], 
+    ["FOREIGN KEY (invoice_id) REFERENCES Invoice (id)"])
+    
+    create_table("Payment", ["id TEXT PRIMARY KEY", "date STRING", "contact_id TEXT", "total REAL", "exchange_rate REAL", "is_income INTEGER",
      "FOREIGN KEY (contact_id) REFERENCES Contact (id)"])
 
     create_table("PaymentAllocation", ["payment_id TEXT PRIMARY KEY", "invoice_id TEXT", "amount REAL", "date TEXT"],

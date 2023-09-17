@@ -23,23 +23,8 @@ def createContactsDictionary(contacts):
             data_dict_list.append(data_dict)
     return data_dict_list
 
-# Function to execute any SQL query
-def execute_sql_query(sql_query):
-    try:
-        conn = sqlite3.connect(db_name)
-        cursor = conn.cursor()
-        cursor.execute(sql_query)
-        conn.commit()
-        return True  # Query executed successfully
-    except sqlite3.Error as e:
-        print(f"Error executing SQL query: {e}")
-        return False  # Query execution failed
-    finally:
-        if conn:
-            conn.close()
-
 # Function to perform a SELECT query
-def select_from_database(select_query):
+def selectFromDatabase(select_query):
     try:
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
@@ -53,37 +38,24 @@ def select_from_database(select_query):
         if conn:
             conn.close()
 
-@app.route('/manage-contacts/query', methods=['POST'])
-def queryContacts():
-    query = request.get_json()
-    results = select_from_database(query)
-    data_dict_list = createContactsDictionary(results)
-    return jsonify(data_dict_list)
-
-@app.route('/manage-contacts/query-all', methods=['GET'])
-def queryAllContacts():
-    select_query = "SELECT * FROM Contact"
-    results = select_from_database(select_query)
-    data_dict_list = createContactsDictionary(results)
-    return jsonify(data_dict_list)
-
-@app.route('/manage-contacts/new-contact', methods=['POST'])
-def newContact():
-    newUser = request.get_json()
+def insertIntoDatabase(table_name, object):
     conn = sqlite3.connect(db_name)
+    # Enforce foreign key constraints
+    conn.execute("PRAGMA foreign_keys = ON")
+
     cursor = conn.cursor()
     columns = []
     values = []
 
     # Iterate through the object's keys and values
-    for key, value in newUser.items():
+    for key, value in object.items():
         # Add the key (column name) to the columns list
         columns.append(key)
         # Add a placeholder to the values list and store the value
         values.append(value)
 
     # Create the SQL INSERT query dynamically based on the available fields
-    query = f"INSERT INTO Contact ({', '.join(columns)}) VALUES ({', '.join(['?'] * len(columns))})"
+    query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES ({', '.join(['?'] * len(columns))})"
 
     try:
         # Execute the query and pass the values as parameters
@@ -91,45 +63,106 @@ def newContact():
         # Commit the changes to the database
         conn.commit()
         conn.close()
-        return jsonify("success")
+        return "success"
     except sqlite3.Error as e:
         # Handle any exceptions or errors that may occur during execution
         print("Error:", e)
         conn.rollback()  # Rollback the transaction in case of an error
         conn.close()
-        return jsonify("failure")
+        return "failure"
 
-@app.route('/manage-contacts/update-contact', methods=['POST'])
-def updateContact():
-    newUser = request.get_json()
+def updateDatabase(table, object):
+    object = request.get_json()
     conn = sqlite3.connect(db_name)
+    # Enforce foreign key constraints
+    conn.execute("PRAGMA foreign_keys = ON")
+
     cursor = conn.cursor()
     update_statements = []
     update_values = []
 
-    for key, value in newUser.items():
+    for key, value in object.items():
         if key != 'id':
             # Add an update statement for each field except 'id'
             update_statements.append(f"{key} = ?")
             update_values.append(value)
 
     # Create the SQL UPDATE query dynamically
-    query = f"UPDATE Contact SET {', '.join(update_statements)} WHERE id = ?"
+    query = f"UPDATE {table} SET {', '.join(update_statements)} WHERE id = ?"
     # Add the 'id' value to the update values list
-    update_values.append(newUser['id'])
+    update_values.append(object['id'])
 
     try:
         # Execute the query and pass the values as parameters
         cursor.execute(query, tuple(update_values))
         conn.commit()
         conn.close()
-        return jsonify("success")
+        if cursor.rowcount > 0:
+            return "success"
+        else:
+            return "failure"    #No records updated
     except sqlite3.Error as e:
         # Handle any exceptions or errors that may occur during execution
         print("Error:", e)
         conn.rollback()  # Rollback the transaction in case of an error
         conn.close()
-        return jsonify("failure")
+        return "failure"
+
+
+def fetchItemCodes():
+    tuples = selectFromDatabase("SELECT name,code FROM Item")
+    itemCodes = []
+    for tuple in tuples:
+        itemCodes.append(f"{tuple[1]}-{tuple[0]}")
+    return itemCodes
+
+@app.route('/manage-contacts/query', methods=['POST'])
+def queryContacts():
+    query = request.get_json()
+    results = selectFromDatabase(query)
+    data_dict_list = createContactsDictionary(results)
+    return jsonify(data_dict_list)
+
+@app.route('/manage-contacts/query-all', methods=['GET'])
+def queryAllContacts():
+    select_query = "SELECT * FROM Contact"
+    results = selectFromDatabase(select_query)
+    data_dict_list = createContactsDictionary(results)
+    return jsonify(data_dict_list)
+
+@app.route('/manage-contacts/new-contact', methods=['POST'])
+def newContact():
+    newContact = request.get_json()
+    return jsonify(insertIntoDatabase("Contact", newContact))
+
+@app.route('/manage-contacts/update-contact', methods=['POST'])
+def updateContact():
+    updatedContact = request.get_json()
+    return jsonify(updateDatabase("Contact", updateContact))
+
+@app.route('/record-invoice/new-invoice', methods=['POST'])
+def newInvoice():
+    newInvoice = request.get_json()
+    return jsonify(insertIntoDatabase("Invoice", newInvoice))
+
+@app.route('/record-invoice/new-invoice-line', methods=['POST'])
+def newInvoiceLine():
+    newInvoiceLine = request.get_json()
+    if insertIntoDatabase("InvoiceLine", newInvoiceLine) == "success":
+        conn = sqlite3.connect(db_name)
+        conn.execute("PRAGMA foreign_keys = ON")
+        cursor = conn.cursor()
+        try:
+            cursor.execute("UPDATE Invoice SET total = total + ?, amount_due = amount_due + ? WHERE id = ?", (newInvoiceLine['total'], newInvoiceLine['total'], newInvoiceLine['invoice_id']))
+            conn.commit()
+            conn.close()
+            return jsonify("success")
+        except sqlite3.Error as e:
+            print("Error:", e)
+            conn.rollback()  # Rollback the transaction in case of an error
+            conn.close()
+    return jsonify("failure")
+
 
 @app.route('/', methods=['GET'])
 def home():
