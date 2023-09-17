@@ -33,9 +33,9 @@ function getQuery(){
     if (emailInput.value.trim() !== '')
         conditions.push(`email="${emailInput.value.trim()}"`)
     if (phoneInput.value.trim() !== '') 
-        conditions.push(`phone="${nameInput.value.trim()}"`)
+        conditions.push(`phone="${phoneInput.value.trim()}"`)
     if (idInput.value.trim() !== '') 
-        conditions.push(`id="${nameInput.value.trim()}"`)
+        conditions.push(`id="${idInput.value.trim()}"`)
     //Get the contact's role
     switch (roleInput.value){
         case "Customer":

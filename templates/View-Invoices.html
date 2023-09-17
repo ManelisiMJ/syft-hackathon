@@ -46,22 +46,46 @@
           </div>
         </nav>
       </div></header>
-    <section class="u-clearfix u-section-1" id="sec-febb">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h4 class="u-text u-text-palette-1-base u-text-1">Filters</h4>
-        <h6 class="u-text u-text-2">ID</h6>
-        <h6 class="u-text u-text-3">Issue date</h6>
-        <h6 class="u-text u-text-4">Due date</h6>
-        <h6 class="u-text u-text-5">Paid</h6>
-        <h6 class="u-text u-text-6">Contact ID</h6>
-        <h6 class="u-text u-text-7">Type</h6>
-        <a href="" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">apply filters</a>
-      </div>
-    </section>
+      <section class="u-clearfix u-section-1" id="sec-febb">
+        <div class="u-clearfix u-sheet u-sheet-1">
+          <h4 class="u-text u-text-palette-1-base u-text-1">Filters</h4>
+          <div class="u-clearfix u-custom-html u-custom-html-1">
+            <input id="due-date" type="date" style="width: 190px; height: 32px;">
+          </div>
+          <div class="u-clearfix u-custom-html u-custom-html-2">
+            <input id="issue-date" type="date" style="width: 190px; height: 32px;">
+          </div>
+          <h6 class="u-text u-text-2">ID</h6>
+          <div class="u-clearfix u-custom-html u-custom-html-3">
+            <input id="invoice-id" type="text">
+          </div>
+          <h6 class="u-text u-text-3">Issue date</h6>
+          <h6 class="u-text u-text-4">Due date</h6>
+          <div class="u-clearfix u-custom-html u-custom-html-4">
+            <input id="contact-id" type="text">
+          </div>
+          <div class="u-clearfix u-custom-html u-custom-html-5">
+            <select name="type" id="type" style="width: 190px; height: 32px;">
+              <option value="empty"></option>
+              <option value="sale">Sales Invoice </option>
+              <option value="purchase">Purchase Invoice</option>
+            </select>
+          </div>
+          <h6 class="u-text u-text-5">Paid</h6>
+          <div class="u-clearfix u-custom-html u-custom-html-6">
+            <select name="paid" id="paid" style="width: 190px; height: 32px;">
+              <option value="empty"></option>
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
+          <h6 class="u-text u-text-6">Contact ID</h6>
+          <h6 class="u-text u-text-7">Type</h6>
+          <button id="filter" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">apply filters</button>
     <section class="u-clearfix u-section-2" id="sec-599c">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">Invoices</h2>
-        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
           <table class="u-table-entity">
             <colgroup>
               <col width="9.9%">
@@ -89,29 +113,21 @@
                 <th class="u-border-1 u-border-black u-table-cell">Is sale</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
-              <tr style="height: 66px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            <tbody id="invoices-table" class="u-table-body">
+              <tr style="height: 50px;">
+                
               </tr>
             </tbody>
           </table>
         </div>
-        <a href="" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">fetch line items</a>
+        <input id="search-id" type="text" disabled placeholder="Select an Invoice ID" style="position: absolute; margin-top: 25px;">
+        <button id="fetch" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">fetch line items</button>
       </div>
     </section>
     <section class="u-clearfix u-section-3" id="sec-e430">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">Invoices Lines</h2>
-        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
           <table class="u-table-entity">
             <colgroup>
               <col width="16.6%">
@@ -131,19 +147,16 @@
                 <th class="u-border-1 u-border-black u-table-cell">Quantity</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
-              <tr style="height: 66px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            <tbody id="lines-table" class="u-table-body">
+              <tr style="height: 50px;">
+                
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+    </section>
+    </div>
     </section>
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8">
@@ -151,5 +164,5 @@
         <p class="u-small-text u-text u-text-variant u-text-1">SAP@J's Cupcake Company | Ncube Manelisi</p>
       </div>
     </footer>
-    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/View-Invoices.js') }}"></script>
+    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/View-Invoices.js') }}"></script>
 </body></html>

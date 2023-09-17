@@ -23,6 +23,43 @@ def createContactsDictionary(contacts):
             data_dict_list.append(data_dict)
     return data_dict_list
 
+
+def createInvoiceLinesDictionary(invoiceLines):
+    data_dict_list = []
+    if invoiceLines is not None:
+        for row in invoiceLines:
+            data_dict = {
+            'id': row[0],
+            'invoice_id': row[1],
+            'description': row[2],
+            'item_code': row[3],
+            'total': row[4],
+            'quantity': row[5]
+            }
+            data_dict_list.append(data_dict)
+    return data_dict_list
+
+
+def createInvoiceDictionary(invoices):
+    data_dict_list = []
+    if invoices is not None:
+        for row in invoices:
+            data_dict = {
+            'id': row[0],
+            'issue_date': row[1],
+            'due_date': row[2],
+            'paid_date': row[3],
+            'paid': row[4],
+            'contact_id': row[5],
+            'total': row[6],
+            'amount_due': row[7],
+            'exchange_rate': row[8],
+            'currency': row[9],
+            'is_sale': row[10]
+            }
+            data_dict_list.append(data_dict)
+    return data_dict_list
+
 # Function to perform a SELECT query
 def selectFromDatabase(select_query):
     try:
@@ -162,6 +199,21 @@ def newInvoiceLine():
             conn.rollback()  # Rollback the transaction in case of an error
             conn.close()
     return jsonify("failure")
+
+
+@app.route('/view-invoices/query', methods=['POST'])
+def queryInvoices():
+    query = request.get_json()
+    results = selectFromDatabase(query)
+    data_dict_list = createInvoiceDictionary(results)
+    return jsonify(data_dict_list)
+
+@app.route('/view-invoices/query-invoice-lines', methods=['POST'])
+def queryInvoiceLines():
+    query = request.get_json()
+    results = selectFromDatabase(query)
+    data_dict_list = createInvoiceLinesDictionary(results)
+    return jsonify(data_dict_list)
 
 
 @app.route('/', methods=['GET'])
