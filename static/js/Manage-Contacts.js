@@ -169,9 +169,8 @@ updateCustomerBtn.addEventListener("click", ()=>{
         updatedUser.id = id
         updatedUser.is_supplier = is_supplier
         updatedUser.is_customer = is_customer
-
         console.log(updatedUser)
-
+        
         let url = `${SERVER_IP}/manage-contacts/update-contact`
         fetch(url, {
             method: 'POST',

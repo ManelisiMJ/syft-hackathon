@@ -43,7 +43,6 @@ function getQuery(){
     return query += conditions.join(" AND ")
 }
 
-
 filterBtn.addEventListener("click", ()=>{
     let query = getQuery()
     console.log(query)
@@ -86,13 +85,14 @@ fetchBtn.addEventListener("click", ()=>{
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                displayLineItems(data)
+                if (data.length == 0)
+                    window.alert("No records found with that invoice id")
+                else
+                    displayLineItems(data)
             })
             .catch(error => console.log('Error:', error))
         }
 })
-
 
 function displayInvoices(invoices){
     const invoicesTable = document.getElementById("invoices-table")
@@ -101,7 +101,7 @@ function displayInvoices(invoices){
         let sale = (invoices[i].is_sale == 1)
         let paid = (invoices[i].paid == 1)
         invoicesTable.innerHTML += `
-                <td class="u-border-1 u-border-grey-30 u-table-cell invoice-id id">${invoices[i].id}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell invoice-id">${invoices[i].id}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${invoices[i].issue_date}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${invoices[i].due_date}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${paid}</td>
@@ -131,7 +131,7 @@ function displayLineItems(invoice){
 }
 
 function handleCellClick() {
-    let invoiceCells = document.querySelectorAll(".id")
+    let invoiceCells = document.querySelectorAll("invoice.id")
     for (let i = 0; i<invoiceCells.length; i++){
         invoiceCells[i].addEventListener("click",(event)=>{
             searchID.value = event.target.textContent

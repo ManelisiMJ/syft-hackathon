@@ -146,12 +146,19 @@ def updateDatabase(table, object):
         return "failure"
 
 
-def fetchItemCodes():
-    tuples = selectFromDatabase("SELECT name,code FROM Item")
-    itemCodes = []
+def fetchInventory():
+    tuples = selectFromDatabase("SELECT * FROM Item")
+    items = []
     for tuple in tuples:
-        itemCodes.append(f"{tuple[1]}-{tuple[0]}")
-    return itemCodes
+        item = {
+            "id": tuple[0],
+            "name": tuple[1],
+            "code": tuple[2],
+            "quantity_on_hand": tuple[3],
+            "purchase_unit_price": tuple[4],
+            "sale_unit_price": tuple[5]}
+        items.append(item)
+    return items
 
 @app.route('/manage-contacts/query', methods=['POST'])
 def queryContacts():
@@ -215,6 +222,22 @@ def queryInvoiceLines():
     data_dict_list = createInvoiceLinesDictionary(results)
     return jsonify(data_dict_list)
 
+@app.route('/record-payment/query', methods=['POST'])
+def fetchInvoice():
+    query = request.get_json()
+    results = selectFromDatabase(query)
+    data_dict_list = createInvoiceDictionary(results)
+    return jsonify(data_dict_list)
+
+
+
+@app.route('/record-payment/pay', methods=['POST'])
+def pay():
+    data = request.get_json()
+    print(data)
+    return jsonify("success")
+
+
 
 @app.route('/', methods=['GET'])
 def home():
@@ -242,7 +265,7 @@ def recordPayment():
 
 @app.route('/manage-inventory', methods=['GET'])
 def manageInventory():
-    return render_template('Manage-Inventory.html')
+    return render_template('Manage-Inventory.html', items=fetchInventory())
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))

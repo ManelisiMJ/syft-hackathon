@@ -5,6 +5,7 @@
     <meta name="keywords" content="Manage Inventory">
     <meta name="description" content="">
     <title>Manage Inventory</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Manage-Inventory.css') }}" media="screen">
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
@@ -16,30 +17,27 @@
     <meta property="og:type" content="website">
   <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-a257"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="" class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
+        <div class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
           <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="u-logo-image u-logo-image-1">
-        </a>
+        </div>
         <p class="u-custom-font u-heading-font u-text u-text-default u-text-palette-1-base u-text-1">J's Cupcake Company </p>
         <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
             <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Home</span>
-</li><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Apps</span>
-</li></ul>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"  style="padding: 18px 34px;">Home</span>
+            </li><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"  style="padding: 18px 34px;">Apps</span></li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><span class="u-button-style u-nav-link" href="Home.html">Home</span>
-</li><li class="u-nav-item"><span class="u-button-style u-nav-link">Apps</span>
-</li></ul>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><span class="u-button-style u-nav-link" >Home</span>
+                </li><li class="u-nav-item"><span class="u-button-style u-nav-link" >Apps</span></li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -49,7 +47,7 @@
     <section class="u-clearfix u-section-1" id="sec-6a14">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">Manage Inventory</h2>
-        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
           <table class="u-table-entity u-table-entity-1">
             <colgroup>
               <col width="16.6%">
@@ -60,7 +58,7 @@
               <col width="17%">
             </colgroup>
             <thead class="u-black u-table-header u-table-header-1">
-              <tr style="height: 21px;">
+              <tr style="height: 41px;">
                 <th class="u-border-1 u-border-black u-table-cell">ID</th>
                 <th class="u-border-1 u-border-black u-table-cell">Name</th>
                 <th class="u-border-1 u-border-black u-table-cell">Code</th>
@@ -70,24 +68,45 @@
               </tr>
             </thead>
             <tbody class="u-table-body">
-              <tr style="height: 76px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              {% for item in items %}
+              <tr style="height: 41px;">
+                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.id}}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.name}}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.code}}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.quantity_on_hand}}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.purchase_unit_price}}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.sale_unit_price}}</td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
-        <h6 class="u-text u-text-default u-text-2">Code</h6>
-        <h6 class="u-text u-text-default u-text-3">Name</h6>
-        <h6 class="u-text u-text-default u-text-4">Quantity on hand</h6>
-        <h6 class="u-text u-text-default u-text-5">Purchase unit price</h6>
-        <h6 class="u-text u-text-default u-text-6">Sale unit price</h6>
-        <a href="" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">update item</a>
-        <a href="" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-base u-palette-4-light-1 u-radius-50 u-btn-2">NEW ITEM</a>
+        <h6 class="u-text u-text-default u-text-2">ID</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-1">
+          <input id="id" type="text">
+        </div>
+        <div class="u-clearfix u-custom-html u-custom-html-2">
+          <input id="code" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-3">Code</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-3">
+          <input id="name" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-4">Name</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-4">
+          <input id="on-hand" type="number" min="1">
+        </div>
+        <h6 class="u-text u-text-default u-text-5">Quantity on hand</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-5">
+          <input id="purchase-price" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-6">Purchase unit price</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-6">
+          <input id="selling-price" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-7">Selling unit price</h6>
+        <button id="update" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">update item</button>
+        <button id="new" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-base u-palette-4-light-1 u-radius-50 u-btn-2">new item</button>
       </div>
     </section>
     
@@ -96,5 +115,5 @@
       </div>
     </footer>
 
-    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Manage-Inventory.js') }}"></script>
+    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Manage-Inventory.js') }}" defer=""></script>
 </body></html>

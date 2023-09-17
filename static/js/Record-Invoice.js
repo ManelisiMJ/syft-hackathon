@@ -89,7 +89,7 @@ addBtn.addEventListener("click", ()=>{
             .then(response => response.json())
             .then(data => {
                 if (data == "success"){
-                    window.alert("Invoice Line inserted and Invoice updated successfully!")
+                    window.alert("Invoice Line added, Corresponding records updated successfully!")
                     table.innerHTML += `<tr style="height: 50px;">
                     <td class="u-border-1 u-border-grey-30 u-table-cell">${newInvoiceLine.id}</td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell">${newInvoiceLine.invoice_id}</td>
