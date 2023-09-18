@@ -46,7 +46,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">Record Payment</h2>
         <div class="u-clearfix u-custom-html u-custom-html-1">
-          <input id="invoice-id" type="text">
+          <input id="invoice-id" type="text" placeholder="Invoice you wish to settle">
         </div>
         <h6 class="u-text u-text-2">Invoice ID</h6>
         <button id="load" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">LOAD INVOICE</button>
@@ -78,25 +78,15 @@
                 <th class="u-border-1 u-border-black u-table-cell">Is sale</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
-              <tr style="height: 38px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-              </tr>
+            <tbody class="u-table-body" id="invoice-table">
+              
             </tbody>
           </table>
+          <p class="lead" style="color: red; font-size: small;">*Click on a row</p>
         </div>
         <h6 class="u-text u-text-3">Payment ID</h6>
         <div class="u-clearfix u-custom-html u-custom-html-2">
-          <input id="payment-id" type="text">
+          <input id="payment-id" type="text" placeholder="Must be unique">
         </div>
         <div class="u-clearfix u-custom-html u-custom-html-3">
           <input id="date" type="date" style="width: 190px; height: 32px;">
@@ -135,15 +125,8 @@
                 <th class="u-border-1 u-border-black u-table-cell">Is Income</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
-              <tr style="height: 44px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
-              </tr>
+            <tbody class="u-table-body" id="payment-table">
+              
             </tbody>
           </table>
         </div>

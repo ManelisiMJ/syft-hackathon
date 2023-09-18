@@ -45,7 +45,6 @@ function getQuery(){
 
 filterBtn.addEventListener("click", ()=>{
     let query = getQuery()
-    console.log(query)
     if (query == "SELECT * from Invoice WHERE "){
         window.alert("Please give filter criteria")
     }
@@ -74,7 +73,6 @@ fetchBtn.addEventListener("click", ()=>{
     }
     else{
         let query = `SELECT * from InvoiceLine WHERE invoice_id="${id}"`
-        console.log(query)
         let url = `${SERVER_IP}/view-invoices/query-invoice-lines`
             fetch(url, {
                 method: 'POST',
@@ -101,7 +99,7 @@ function displayInvoices(invoices){
         let sale = (invoices[i].is_sale == 1)
         let paid = (invoices[i].paid == 1)
         invoicesTable.innerHTML += `
-                <td class="u-border-1 u-border-grey-30 u-table-cell invoice-id">${invoices[i].id}</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell invoice-id" style="cursor: pointer;">${invoices[i].id}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${invoices[i].issue_date}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${invoices[i].due_date}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${paid}</td>
@@ -131,7 +129,7 @@ function displayLineItems(invoice){
 }
 
 function handleCellClick() {
-    let invoiceCells = document.querySelectorAll("invoice-id")
+    let invoiceCells = document.querySelectorAll(".invoice-id")
     for (let i = 0; i<invoiceCells.length; i++){
         invoiceCells[i].addEventListener("click",(event)=>{
             searchID.value = event.target.textContent

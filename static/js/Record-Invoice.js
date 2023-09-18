@@ -42,7 +42,7 @@ createBtn.addEventListener("click", ()=>{
             .then(response => response.json())
             .then(data => {
                 if (data == "success"){
-                    window.alert("Invoice recorded successfully!")
+                    window.alert("Invoice recorded, Add line item to it")
                     lineInvoiceId.value = invoiceID
                 }
                 else 

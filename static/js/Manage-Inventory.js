@@ -19,7 +19,7 @@ let codeCells = document.querySelectorAll("code")
 const rows = document.querySelectorAll(".row")
 console.log(rows)
 for (let i = 0; i<rows.length; i++){
-    rows[i].addEventListener("click", function (event) {
+    rows[i].addEventListener("click", ()=>{
         const cellsInRow = rows[i].querySelectorAll("td");
         console.log(cellsInRow)
         // Iterate through the cells and assign their contents to variables

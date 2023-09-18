@@ -140,16 +140,16 @@ if __name__ == "__main__":
 
     create_table("Item", ["id TEXT", "name TEXT", "code TEXT PRIMARY KEY", "quantity_on_hand INTEGER", "purchase_unit_price REAL", "sale_unit_price REAL"])
 
-    create_table("Invoice", ["id TEXT PRIMARY KEY","issue_date TEXT","due_date TEXT","paid_date TEXT","paid INTEGER","contact_id TEXT","total REAL","amount_due REAL","exchange_rate REAL","currency TEXT", "is_sale INTEGER",
+    create_table("Invoice", ["id TEXT PRIMARY KEY","issue_date DATE","due_date DATE","paid_date DATE","paid INTEGER","contact_id TEXT","total REAL","amount_due REAL","exchange_rate REAL","currency TEXT", "is_sale INTEGER",
      "FOREIGN KEY (contact_id) REFERENCES Contact (id)"])
 
     create_table("InvoiceLine", ["id TEXT PRIMARY KEY", "invoice_id TEXT", "description TEXT", "item_code TEXT", "total REAL", "quantity INTEGER"], 
     ["FOREIGN KEY (invoice_id) REFERENCES Invoice (id)"])
     
-    create_table("Payment", ["id TEXT PRIMARY KEY", "date STRING", "contact_id TEXT", "total REAL", "exchange_rate REAL", "is_income INTEGER",
+    create_table("Payment", ["id TEXT PRIMARY KEY", "date DATE", "contact_id TEXT", "total REAL", "exchange_rate REAL", "is_income INTEGER",
      "FOREIGN KEY (contact_id) REFERENCES Contact (id)"])
 
-    create_table("PaymentAllocation", ["payment_id TEXT PRIMARY KEY", "invoice_id TEXT", "amount REAL", "date TEXT"],
+    create_table("PaymentAllocation", ["payment_id TEXT PRIMARY KEY", "invoice_id TEXT", "amount REAL", "date DATE"],
      ["FOREIGN KEY (payment_id) REFERENCES Payment (id)", 
      "FOREIGN KEY (invoice_id) REFERENCES Invoice (id)"])
 

@@ -222,10 +222,6 @@ def queryInvoiceLines():
     data_dict_list = createInvoiceLinesDictionary(results)
     return jsonify(data_dict_list)
 
-
-
-
-
 @app.route('/record-payment/query', methods=['POST'])
 def fetchInvoice():
     query = request.get_json()
@@ -233,19 +229,46 @@ def fetchInvoice():
     data_dict_list = createInvoiceDictionary(results)
     return jsonify(data_dict_list)
 
-
-
-
 @app.route('/record-payment/pay', methods=['POST'])
 def pay():
     data = request.get_json()
-    print(data)
-    return jsonify("success")
 
+    conn = sqlite3.connect(db_name)
+    conn.execute("PRAGMA foreign_keys = ON") #Enforece referential integrity
+    cursor = conn.cursor()
+    try:
+        cursor.execute(f"SELECT is_sale, amount_due FROM Invoice WHERE id = '{data['invoice_id']}'")
+        requiredFields = cursor.fetchall()[0]
+        invoiceIsIncome = requiredFields[0]
+        amountDue = requiredFields[1]
+        #Insert payment record
+        cursor.execute(
+            "INSERT INTO Payment (id, date, contact_id, total, exchange_rate, is_income) VALUES (?, ?, ?, ?, ?, ?)",
+            (data["id"], data["date"], data["contact_id"], data["total"], data["exchange_rate"], invoiceIsIncome)
+        )
 
+        #Insert payment allocation
+        cursor.execute(
+            "INSERT INTO PaymentAllocation (payment_id, invoice_id, amount, date) VALUES (?, ?, ?, ?)",
+            (data["id"], data["invoice_id"], data["total"], data["date"])
+        )
 
+        #Update invoice record
+        newAmountDue = amountDue - data["total"]
+        newIsPaid = 1 if newAmountDue <= 0 else 0
+        cursor.execute(
+            "UPDATE Invoice SET amount_due = ?, paid = ? WHERE id = ?",
+            (newAmountDue, newIsPaid, data["invoice_id"])
+        )
 
-
+        conn.commit()
+        conn.close()
+        return jsonify("success")
+    except sqlite3.Error as e:
+        print("Error:", e)
+        conn.rollback()  # Rollback the transaction in case of an error
+        conn.close()
+    return jsonify("failure")
 
 
 @app.route('/manage-inventory/add', methods=['POST'])
