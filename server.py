@@ -108,7 +108,7 @@ def insertIntoDatabase(table_name, object):
         conn.close()
         return "failure"
 
-def updateDatabase(table, object):
+def updateDatabase(table, object, primaryKey):
     object = request.get_json()
     conn = sqlite3.connect(db_name)
     # Enforce foreign key constraints
@@ -119,15 +119,15 @@ def updateDatabase(table, object):
     update_values = []
 
     for key, value in object.items():
-        if key != 'id':
-            # Add an update statement for each field except 'id'
+        if key != primaryKey:
+            # Add an update statement for each field except primaryKey
             update_statements.append(f"{key} = ?")
             update_values.append(value)
 
     # Create the SQL UPDATE query dynamically
-    query = f"UPDATE {table} SET {', '.join(update_statements)} WHERE id = ?"
-    # Add the 'id' value to the update values list
-    update_values.append(object['id'])
+    query = f"UPDATE {table} SET {', '.join(update_statements)} WHERE {primaryKey} = ?"
+    # Add the primaryKey value to the update values list
+    update_values.append(object[primaryKey])
 
     try:
         # Execute the query and pass the values as parameters
@@ -182,7 +182,7 @@ def newContact():
 @app.route('/manage-contacts/update-contact', methods=['POST'])
 def updateContact():
     updatedContact = request.get_json()
-    return jsonify(updateDatabase("Contact", updateContact))
+    return jsonify(updateDatabase("Contact", updateContact, "id"))
 
 @app.route('/record-invoice/new-invoice', methods=['POST'])
 def newInvoice():
@@ -222,12 +222,17 @@ def queryInvoiceLines():
     data_dict_list = createInvoiceLinesDictionary(results)
     return jsonify(data_dict_list)
 
+
+
+
+
 @app.route('/record-payment/query', methods=['POST'])
 def fetchInvoice():
     query = request.get_json()
     results = selectFromDatabase(query)
     data_dict_list = createInvoiceDictionary(results)
     return jsonify(data_dict_list)
+
 
 
 
@@ -238,6 +243,21 @@ def pay():
     return jsonify("success")
 
 
+
+
+
+
+
+@app.route('/manage-inventory/add', methods=['POST'])
+def addInventory():
+    newItem = request.get_json()
+    return jsonify(insertIntoDatabase("Item", newItem))
+
+@app.route('/manage-inventory/update', methods=['POST'])
+def updateInventory():
+    updatedItem = request.get_json()
+    print(updatedItem)
+    return jsonify(updateDatabase("Item", updatedItem, "code"))
 
 @app.route('/', methods=['GET'])
 def home():

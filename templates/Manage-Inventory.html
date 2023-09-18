@@ -5,7 +5,6 @@
     <meta name="keywords" content="Manage Inventory">
     <meta name="description" content="">
     <title>Manage Inventory</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Manage-Inventory.css') }}" media="screen">
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
@@ -59,18 +58,18 @@
             </colgroup>
             <thead class="u-black u-table-header u-table-header-1">
               <tr style="height: 41px;">
-                <th class="u-border-1 u-border-black u-table-cell">ID</th>
-                <th class="u-border-1 u-border-black u-table-cell">Name</th>
                 <th class="u-border-1 u-border-black u-table-cell">Code</th>
+                <th class="u-border-1 u-border-black u-table-cell">Name</th>
+                <th class="u-border-1 u-border-black u-table-cell">ID</th>
                 <th class="u-border-1 u-border-black u-table-cell">Quantity on hand</th>
                 <th class="u-border-1 u-border-black u-table-cell">Purchase Unit Price</th>
                 <th class="u-border-1 u-border-black u-table-cell">Sale Unit Price</th>
               </tr>
             </thead>
-            <tbody class="u-table-body">
+            <tbody class="u-table-body" id="table">
               {% for item in items %}
-              <tr style="height: 41px;">
-                <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.id}}</td>
+              <tr style="height: 41px;" class="row">
+                <td class="u-border-1 u-border-grey-30 u-table-cell code">{{item.id}}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.name}}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.code}}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">{{item.quantity_on_hand}}</td>
@@ -80,6 +79,7 @@
               {% endfor %}
             </tbody>
           </table>
+          <p class="lead" style="color: red; font-size: small;">*Click on a row</p>
         </div>
         <h6 class="u-text u-text-default u-text-2">ID</h6>
         <div class="u-clearfix u-custom-html u-custom-html-1">

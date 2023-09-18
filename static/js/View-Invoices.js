@@ -131,7 +131,7 @@ function displayLineItems(invoice){
 }
 
 function handleCellClick() {
-    let invoiceCells = document.querySelectorAll("invoice.id")
+    let invoiceCells = document.querySelectorAll("invoice-id")
     for (let i = 0; i<invoiceCells.length; i++){
         invoiceCells[i].addEventListener("click",(event)=>{
             searchID.value = event.target.textContent
