@@ -12,8 +12,8 @@ let sale
 
 loadBtn.addEventListener("click", ()=>{
     let invoiceId = invoiceIdBox.value
-    let query = `Select * from Invoice WHERE id="${invoiceId}"`
-    let url = `${SERVER_IP}/record-payment/query`
+    let query = `Select * from Invoice WHERE id="${invoiceId}"` //Send query to fetch invoice
+    let url = `${SERVER_IP}/record-payment/query`   //Send request
         fetch(url, {
             method: 'POST',
             headers: {
@@ -23,7 +23,7 @@ loadBtn.addEventListener("click", ()=>{
         })
         .then(response => response.json())
         .then(data => {
-            displayInvoices(data)
+            displayInvoices(data)   //Display invoice data
         })
         .catch(error => console.log('Error:', error))
 })
@@ -37,7 +37,7 @@ recordBtn.addEventListener("click", ()=>{
     if (isNaN(amount) || amount <= 0 || isNaN(exchangeRate) || exchangeRate<=0)
         window.alert("Please enter valid payment amount and exchange rate")
     else if (paymentId != "" && date != "" && contactId != ""){
-        let payment = {
+        let payment = {     //Create payment object
             id:paymentId,
             amount:amount,
             date: date,
@@ -46,7 +46,7 @@ recordBtn.addEventListener("click", ()=>{
             exchange_rate:exchangeRate,
             invoice_id:invoiceIdBox.value
         }
-        let url = `${SERVER_IP}/record-payment/pay`
+        let url = `${SERVER_IP}/record-payment/pay`     //Send request to add payment
         fetch(url, {
             method: 'POST',
             headers: {
@@ -56,7 +56,6 @@ recordBtn.addEventListener("click", ()=>{
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data == "success"){
                 displayPayment(payment)
                 window.alert("Payment posted and allocated successfully!")
@@ -71,11 +70,11 @@ recordBtn.addEventListener("click", ()=>{
         window.alert("Ensure all fields are populated")
 })
 
-function displayInvoices(invoices){
+function displayInvoices(invoices){     //Displays invoice on table
     const invoiceTable = document.getElementById("invoice-table")
     invoiceTable.innerHTML = ""
     for (let i = 0; i<invoices.length; i++){
-        sale = (invoices[i].is_sale == 1)
+        sale = (invoices[i].is_sale == 1)   //Convert 0/1 to true/false for displaying
         let paid = (invoices[i].paid == 1)
         invoiceTable.innerHTML += `
             <tr style="height: 38px;" class="row">
@@ -94,7 +93,7 @@ function displayInvoices(invoices){
     handleCellClick()
 }
 
-function displayPayment(payment){
+function displayPayment(payment){   //Displays payment on table
     const paymentTable = document.getElementById("payment-table")
     paymentTable.innerHTML += `
     <tr style="height: 44px;">
@@ -107,16 +106,16 @@ function displayPayment(payment){
     </tr>`
     const amountDueCell = document.getElementById("amount-due")
     const paidCell = document.getElementById("paid")
-    let newAmountDue = Number(amountDueCell.textContent) - payment.total
-    amountDueCell.textContent = newAmountDue
+    let newAmountDue = Number(amountDueCell.textContent) - payment.total    
+    amountDueCell.textContent = newAmountDue    //Update amount due when payment is made
     
     if (newAmountDue <= 0)
-        paidCell.textContent = "true"
+        paidCell.textContent = "true"   //Convert 0/1 to true/false for displaying
     else
         paidCell.textContent = "false"
 }
 
-function handleCellClick(){
+function handleCellClick(){     //Attach event listner to rows in the table
     const rows = document.querySelectorAll(".row")
     for (let i = 0; i<rows.length; i++){
         rows[i].addEventListener("click", ()=> {

@@ -1,5 +1,6 @@
 import SERVER_IP from './config.js'
 
+//Add event listeners for all the buttons
 const manageContactsBtn = document.getElementById('manage-contacts')
   manageContactsBtn.addEventListener('click', ()=> {
     window.location.href = `${SERVER_IP}/manage-contacts`

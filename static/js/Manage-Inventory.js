@@ -9,20 +9,11 @@ const idBox = document.getElementById("id")
 const updateBtn = document.getElementById("update")
 const newBtn = document.getElementById("new")
 
-let codeCells = document.querySelectorAll("code")
-    for (let i = 0; i<codeCells.length; i++){
-        codeCells[i].addEventListener("click",(event)=>{
-            code.value = event.target.textContent
-    })
-}
-
-const rows = document.querySelectorAll(".row")
-console.log(rows)
+const rows = document.querySelectorAll(".row")  //Get the rows
 for (let i = 0; i<rows.length; i++){
     rows[i].addEventListener("click", ()=>{
-        const cellsInRow = rows[i].querySelectorAll("td");
-        console.log(cellsInRow)
-        // Iterate through the cells and assign their contents to variables
+        const cellsInRow = rows[i].querySelectorAll("td");  //Select all the cells in the row
+        // Iterate through the cells and assign their contents to the text boxes
         cellsInRow.forEach(function (cell, index) {
         if (index === 0) 
             idBox.value = cell.textContent
@@ -41,11 +32,11 @@ for (let i = 0; i<rows.length; i++){
 }
 
 newBtn.addEventListener("click", ()=>{
-    let newItem = createItem()
-    if (isNaN(newItem.purchase_unit_price) || isNaN(newItem.sale_unit_price))
+    let newItem = createItem()  //Get the item object
+    if (isNaN(newItem.purchase_unit_price) || isNaN(newItem.sale_unit_price))   //Invalid amounts
         window.alert("Please enter valid amounts for prices")
     else if (newItem.id!="" && newItem.name!="" && newItem.code!=""){
-        let url = `${SERVER_IP}/manage-inventory/add`
+        let url = `${SERVER_IP}/manage-inventory/add`   //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -68,11 +59,11 @@ newBtn.addEventListener("click", ()=>{
 
 
 updateBtn.addEventListener("click", ()=>{
-    let updatedItem = createItem()
-    if (isNaN(updatedItem.purchase_unit_price) || isNaN(updatedItem.sale_unit_price))
+    let updatedItem = createItem()  //Get updated item
+    if (isNaN(updatedItem.purchase_unit_price) || isNaN(updatedItem.sale_unit_price))   //Invalid amounts
         window.alert("Please enter valid amounts for prices")
     else if (updatedItem.id!="" && updatedItem.name!="" && updatedItem.code!=""){
-        let url = `${SERVER_IP}/manage-inventory/update`
+        let url = `${SERVER_IP}/manage-inventory/update`    //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -93,7 +84,7 @@ updateBtn.addEventListener("click", ()=>{
         window.alert("Please populate all fields")
 })
 
-function createItem(){
+function createItem(){  //Gets the contents of the inputs and creates an Item object
     let id = idBox.value
     let itemName = nameBox.value
     let code = codeBox.value

@@ -1,16 +1,20 @@
 import SERVER_IP from './config.js'
-
+const nameInput = document.getElementById('name')
+const emailInput = document.getElementById('email')
+const roleInput = document.getElementById('role')
+const phoneInput = document.getElementById('phone')
+const idInput = document.getElementById('id')
 const contactsTable = document.getElementById("contacts-table")
 const showAllBtn = document.getElementById('show-all')
-  showAllBtn.addEventListener('click', ()=> {
-    let url = `${SERVER_IP}/manage-contacts/query-all`
+
+showAllBtn.addEventListener('click', ()=> {
+    let url = `${SERVER_IP}/manage-contacts/query-all`  //Send request
     fetch(url, {
     method: 'GET', 
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        displayContacts(data)
+        displayContacts(data)   //Display contacts on table
       })
     .catch(error => {
         console.log('There was a problem with the fetch operation:', error)
@@ -20,13 +24,7 @@ const showAllBtn = document.getElementById('show-all')
 function getQuery(){
     let query = "SELECT * from Contact WHERE "
     let conditions = []
-    // Get references to your input elements by their IDs
-    const nameInput = document.getElementById('name')
-    const emailInput = document.getElementById('email')
-    const roleInput = document.getElementById('role')
-    const phoneInput = document.getElementById('phone')
-    const idInput = document.getElementById('id')
-  
+
     // Check each input field and add it to the query if it's not empty
     if (nameInput.value.trim() !== '') 
         conditions.push(`name="${nameInput.value.trim()}"`)
@@ -63,7 +61,7 @@ const filterBtn = document.getElementById('apply-filter')
         window.alert("Please give filter criteria")
     }
     else{
-        let url = `${SERVER_IP}/manage-contacts/query`
+        let url = `${SERVER_IP}/manage-contacts/query`  //Send request
         fetch(url, {
             method: 'POST',
             headers: {
@@ -73,18 +71,17 @@ const filterBtn = document.getElementById('apply-filter')
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            displayContacts(data)
+            displayContacts(data)   //Display on table
         })
         .catch(error => console.log('Error:', error))
         }
 })
 
 
-function displayContacts(contacts){
+function displayContacts(contacts){     //Displays given contacts on table
     contactsTable.innerHTML = ""
     for (let i = 0; i<contacts.length; i++){
-        let customer = (contacts[i].is_customer == 1)
+        let customer = (contacts[i].is_customer == 1)   //Convert 0/1 to true/false
         let supplier = (contacts[i].is_supplier == 1)
         contactsTable.innerHTML += `
         <tr style="height: 50px">
@@ -114,18 +111,16 @@ newCustomerBtn.addEventListener("click", ()=>{
     }
     else{
         if (!name == "")
-            newUser.name = name
+            newUser.name = name //Add name if not empty
         if (!email == "")
-            newUser.email = email
+            newUser.email = email   //Add email if not empty
         if (!phone == "")
-            newUser.phone = phone
+            newUser.phone = phone   //Add phone if not empty
         newUser.id = id
-        newUser.is_supplier = (is_supplier == "True")? 1: 0
-        newUser.is_customer = (is_customer == "True")? 1: 0
+        newUser.is_supplier = Number(is_supplier)   //Convert true/false to 0/1
+        newUser.is_customer = Number(is_customer)
 
-        console.log(newUser)
-
-        let url = `${SERVER_IP}/manage-contacts/new-contact`
+        let url = `${SERVER_IP}/manage-contacts/new-contact`    //Send request
         fetch(url, {
             method: 'POST',
             headers: {
@@ -171,13 +166,13 @@ updateCustomerBtn.addEventListener("click", ()=>{
         updatedUser.is_customer = is_customer
         console.log(updatedUser)
         
-        let url = `${SERVER_IP}/manage-contacts/update-contact`
+        let url = `${SERVER_IP}/manage-contacts/update-contact`     //Send request
         fetch(url, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
             },
-            body: JSON.stringify(updatedUser)
+            body: JSON.stringify(updatedUser)   //Send updated user
         })
         .then(response => response.json())
         .then(data => {

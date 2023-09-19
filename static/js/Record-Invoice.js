@@ -18,7 +18,7 @@ createBtn.addEventListener("click", ()=>{
     }
     else{
         if (invoiceID!="" && issueDate!="" && dueDate!="" && contactID!=""){
-            let newInvoice = {
+            let newInvoice = {      //Create object from the inputs
                 id:invoiceID,
                 issue_date:issueDate,
                 due_date:dueDate,
@@ -29,9 +29,9 @@ createBtn.addEventListener("click", ()=>{
                 total:0,
                 amount_due:0
             }
-            newInvoice.is_sale = (type == "Sale")? 1: 0
+            newInvoice.is_sale = (type == "Sale")? 1: 0 //Convert to 0/1
 
-            let url = `${SERVER_IP}/record-invoice/new-invoice`
+            let url = `${SERVER_IP}/record-invoice/new-invoice` //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -43,7 +43,7 @@ createBtn.addEventListener("click", ()=>{
             .then(data => {
                 if (data == "success"){
                     window.alert("Invoice recorded, Add line item to it")
-                    lineInvoiceId.value = invoiceID
+                    lineInvoiceId.value = invoiceID    
                 }
                 else 
                     window.alert("Error, Please ensure a unique invoice id and a valid contact id")
@@ -56,7 +56,7 @@ createBtn.addEventListener("click", ()=>{
 })
 
 
-addBtn.addEventListener("click", ()=>{
+addBtn.addEventListener("click", ()=>{      //Adds a line item to an invoice
     const table = document.getElementById("lines-table")
     const item = document.getElementById("item-code").value
     const lineId = document.getElementById("line-id").value
@@ -69,7 +69,7 @@ addBtn.addEventListener("click", ()=>{
     }
     else{
         if (lineInvoiceId.value!="" && lineId != "" && description!=""){
-            let newInvoiceLine = {
+            let newInvoiceLine = {  //Create new invoice line item
                 id:lineId,
                 invoice_id:lineInvoiceId.value,
                 description:description,
@@ -78,7 +78,7 @@ addBtn.addEventListener("click", ()=>{
                 quantity:quantity
             }
             
-            let url = `${SERVER_IP}/record-invoice/new-invoice-line`
+            let url = `${SERVER_IP}/record-invoice/new-invoice-line`    //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -89,8 +89,9 @@ addBtn.addEventListener("click", ()=>{
             .then(response => response.json())
             .then(data => {
                 if (data == "success"){
+                    //Display new line item
                     window.alert("Invoice Line added, Corresponding records updated successfully!")
-                    table.innerHTML += `<tr style="height: 50px;">
+                    table.innerHTML += `<tr style="height: 50px;">     
                     <td class="u-border-1 u-border-grey-30 u-table-cell">${newInvoiceLine.id}</td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell">${newInvoiceLine.invoice_id}</td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell">${newInvoiceLine.item_code}</td>

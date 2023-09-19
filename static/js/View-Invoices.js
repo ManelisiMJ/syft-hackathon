@@ -6,7 +6,7 @@ const linesTable = document.getElementById("lines-table")
 const searchID = document.getElementById("search-id")
 
 function getQuery(){
-    let query = "SELECT * from Invoice WHERE "
+    let query = "SELECT * from Invoice WHERE "  //Compile query
     let conditions = []
     const dueDate = document.getElementById("due-date").value
     const issueDate = document.getElementById("issue-date").value
@@ -34,7 +34,7 @@ function getQuery(){
     }
     switch (paid){
         case "true":
-            conditions.push("paid=1")
+            conditions.push("paid=1")       //Convert true/false to 0/1
             break
         case "false":
             conditions.push("paid=0")
@@ -45,11 +45,11 @@ function getQuery(){
 
 filterBtn.addEventListener("click", ()=>{
     let query = getQuery()
-    if (query == "SELECT * from Invoice WHERE "){
+    if (query == "SELECT * from Invoice WHERE "){   //No conditions given
         window.alert("Please give filter criteria")
     }
     else{
-        let url = `${SERVER_IP}/view-invoices/query`
+        let url = `${SERVER_IP}/view-invoices/query`    //Send query
         fetch(url, {
             method: 'POST',
             headers: {
@@ -59,7 +59,7 @@ filterBtn.addEventListener("click", ()=>{
         })
         .then(response => response.json())
         .then(data => {
-            displayInvoices(data)
+            displayInvoices(data)   //Display invoices on table
         })
         .catch(error => console.log('Error:', error))
         }
@@ -72,8 +72,9 @@ fetchBtn.addEventListener("click", ()=>{
         window.alert("Please enter a valid invoice id or click on invoice id cell in the table")
     }
     else{
-        let query = `SELECT * from InvoiceLine WHERE invoice_id="${id}"`
-        let url = `${SERVER_IP}/view-invoices/query-invoice-lines`
+        //Query to get invoice lines for the given invoice
+        let query = `SELECT * from InvoiceLine WHERE invoice_id="${id}"`    
+        let url = `${SERVER_IP}/view-invoices/query-invoice-lines` //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -92,7 +93,7 @@ fetchBtn.addEventListener("click", ()=>{
         }
 })
 
-function displayInvoices(invoices){
+function displayInvoices(invoices){     //Displays the invoice on table
     const invoicesTable = document.getElementById("invoices-table")
     invoicesTable.innerHTML = ""
     for (let i = 0; i<invoices.length; i++){
@@ -110,10 +111,10 @@ function displayInvoices(invoices){
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${invoices[i].currency}</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">${sale}</td>`
     }
-    handleCellClick()
+    handleCellClick()   //Attach event listeners on the id cells
 }
 
-function displayLineItems(invoice){
+function displayLineItems(invoice){     //Displays the invoice line item on table
     linesTable.innerHTML = ""
     for (let i = 0; i<invoice.length; i++){
         linesTable.innerHTML += `
@@ -128,11 +129,11 @@ function displayLineItems(invoice){
     }
 }
 
-function handleCellClick() {
+function handleCellClick() {    //Attaches event lisener on every invoice id cell
     let invoiceCells = document.querySelectorAll(".invoice-id")
     for (let i = 0; i<invoiceCells.length; i++){
         invoiceCells[i].addEventListener("click",(event)=>{
-            searchID.value = event.target.textContent
+            searchID.value = event.target.textContent   //Display id
         })
     }
 }
