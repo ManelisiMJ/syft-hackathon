@@ -338,44 +338,8 @@ def totalRevenueOverTime():
     GROUP BY month
     ORDER BY month;"""
     results = selectFromDatabase(query)
-    xArray, yArray = extractTwoDimestions(results)
-    return {
-            'type': "line",
-            'data': {
-                'labels': xArray,
-                'datasets': [{
-                'fill': False,
-                'lineTension': 0,
-                'backgroundColor': "rgba(0,0,255,1.0)",
-                'borderColor': "rgba(0,0,255,0.1)",
-                'data': yArray
-                }]
-            },
-            'options': {
-                'legend': {'display': False},
-                'title': {
-                    'display': True,
-                    'text': "Total Sales over Time",
-                    'fontSize': 20
-                },
-                'scales': {
-                    'xAxes': [{
-                    'scaleLabel': {
-                        'display': True,
-                        'labelString': 'Months', 
-                        'fontSize': 16 
-                    }
-                    }],
-                    'yAxes': [{
-                        'scaleLabel': {
-                            'display': True,
-                            'labelString': 'Sales Amount', 
-                            'fontSize': 16 
-                        }
-                    }]
-                }
-            }
-    }
+    return (extractTwoDimestions(results))
+     
 
 def topSellingItems():
     query = """SELECT item_code, name, SUM(quantity) AS total_sold
@@ -387,11 +351,13 @@ def topSellingItems():
     print(results)
 
 def outstandingSalesInvoices():
-    query = """SELECT id, amount_due
-    FROM Invoice
-    WHERE paid = 0 and is_sale = 1
-    ORDER BY due_date;"""
+    query = """SELECT Contact.id, name, round(SUM(amount_due), 2)
+    FROM Invoice, Contact
+    WHERE paid = 0 and is_sale = 1 and Invoice.contact_id = Contact.id
+    GROUP BY Contact.id
+    HAVING Sum(amount_due) > 0"""
     results = selectFromDatabase(query)
+    return extractThreeDimensions(results)
 
 def outstandingPurchaseInvoices():
     query = """SELECT id, amount_due
@@ -419,7 +385,8 @@ def paymentTrends():
     ORDER BY month;
     """
     results = selectFromDatabase(query)
-    print(results)
+    return extractTwoDimestions(results)
+    
 
 def currencyExchange():
     query = """SELECT currency, AVG(exchange_rate) AS avg_exchange_rate
@@ -439,6 +406,23 @@ def profitMargin():
     results = selectFromDatabase(query)
     print(results)
 
+def customerComposition():
+    query = '''SELECT
+    SUM(CASE WHEN is_customer = 1 AND is_supplier = 0 THEN 1 ELSE 0 END) AS customer_count,
+    SUM(CASE WHEN is_supplier = 1 AND is_customer = 0 THEN 1 ELSE 0 END) AS supplier_count,
+    SUM(CASE WHEN is_customer = 1 AND is_supplier = 1 THEN 1 ELSE 0 END) AS both_count,
+    SUM(CASE WHEN is_customer = 0 AND is_supplier = 0 THEN 1 ELSE 0 END) AS neither_count
+    FROM
+    Contact;'''
+
+    results = selectFromDatabase(query)
+    values = []
+    for result in results:
+        values.append(result[0])
+        values.append(result[1])
+        values.append(result[2])
+        values.append(result[3])
+    return values
 
 #########################################################################################################
 ############################################################################################################
@@ -493,6 +477,17 @@ def sales():
 def salesByCustomer():
     return jsonify(customerSegregation())
 
+@app.route('/customer-analytics/customer-composition', methods=['GET'])
+def composition():
+    return jsonify(customerComposition())
+
+@app.route('/customer-analytics/payment-trends', methods=['GET'])
+def customerPaymentTrends():
+    return jsonify(paymentTrends())
+
+@app.route('/customer-analytics/outstanding-invoices', methods=['GET'])
+def customerOutstandingInvoices():
+    return jsonify(outstandingSalesInvoices())
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000) #Start server
-    #customerSegregation()

@@ -6,49 +6,39 @@
     <meta name="description" content="">
     <title>Customers</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Customers.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 5.17.1, nicepage.com">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Customers.css') }}" media="screen">
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jcupcakecompany.js') }}" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "",
-		"logo": "images/logo.jpg"
-}</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
     <meta name="theme-color" content="#498fd0">
     <meta property="og:title" content="Customers">
     <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-a257"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
-          <img src="images/logo.jpg" class="u-logo-image u-logo-image-1">
-        </a>
+    <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+    <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-a257"><div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-image u-logo u-image-1" data-image-width="955" data-image-height="619">
+          <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="u-logo-image u-logo-image-1">
+        </div>
         <p class="u-custom-font u-heading-font u-text u-text-default u-text-palette-1-base u-text-1">J's Cupcake Company </p>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
             <a class="u-button-style u-custom-border u-custom-border-color u-custom-borders u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 8px 0px; font-size: calc(1em + 18px);">
               <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
+              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-spacing-20 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base" href="Home.html" style="padding: 10px;">Home</a>
-</li><li class="u-nav-item"><a class="u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base" href="Apps.html" style="padding: 10px;">Apps</a>
-</li></ul>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><span id="home-1" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"style="padding: 18px 34px;">Home</span></li><li class="u-nav-item">
+              <span id="apps-1" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Apps</span></li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Apps.html">Apps</a>
-</li></ul>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><span id="home-2" class="u-button-style u-nav-link">Home</span>
+                </li><li class="u-nav-item"><span id="apps-2" class="u-button-style u-nav-link">Apps</span></li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -63,14 +53,14 @@
               <div class="u-size-30">
                 <div class="u-layout-row">
                   <div class="u-container-style u-layout-cell u-size-23 u-layout-cell-1">
-                    <div class="u-container-layout u-container-layout-1">
+                    <div class="u-container-layout u-valign-bottom u-container-layout-1">
                       <div class="u-clearfix u-custom-html u-custom-html-1">
                         <canvas id="contact-composition"></canvas>
                       </div>
                     </div>
                   </div>
                   <div class="u-container-style u-layout-cell u-size-37 u-layout-cell-2">
-                    <div class="u-container-layout u-valign-bottom u-container-layout-2">
+                    <div class="u-container-layout u-container-layout-2">
                       <div class="u-clearfix u-custom-html u-custom-html-2">
                         <canvas id="payment-trends"></canvas>
                       </div>
@@ -82,8 +72,27 @@
                 <div class="u-layout-row">
                   <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-3">
                     <div class="u-container-layout u-container-layout-3">
-                      <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-3">
-                        <canvas id="outstanding-invoices"></canvas>
+                      <h3 class="u-text u-text-default u-text-1">Outstanding Invoices</h3>
+                      <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 650px; overflow-y: auto;">
+                        <table class="u-table-entity">
+                          <colgroup>
+                            <col width="33.3%">
+                            <col width="33.3%">
+                            <col width="33.400000000000006%">
+                          </colgroup>
+                          <thead class="u-black u-table-header u-table-header-1">
+                            <tr style="height: 21px;">
+                              <th class="u-border-1 u-border-black u-table-cell">Customer ID</th>
+                              <th class="u-border-1 u-border-black u-table-cell">Customer Name</th>
+                              <th class="u-border-1 u-border-black u-table-cell">Amount Due (ZAR)</th>
+                            </tr>
+                          </thead>
+                          <tbody id="outstanding-invoices" class="u-table-body">
+                            <tr style="height: 39px;">
+                              
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -93,23 +102,12 @@
           </div>
         </div>
       </div>
-    </section>
-    
-    
+    </section>  
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">SAP@J's Cupcake Company | Ncube Manelisi</p>
-      </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
+      </div>
+    </footer>
   
+    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Customer-Analytics.js') }}" defer=""></script>
 </body></html>

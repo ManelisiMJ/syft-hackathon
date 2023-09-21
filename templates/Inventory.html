@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <title>Inventory</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/Sales-and-Revenue.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Inventory.css') }}" media="screen">
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jcupcakecompany.js') }}" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -52,7 +52,7 @@
               <div class="u-size-30">
                 <div class="u-layout-row">
                   <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
-                    <div class="u-container-layout u-valign-bottom u-container-layout-1">
+                    <div class="u-container-layout u-valign-top u-container-layout-1">
                       <div class="u-clearfix u-custom-html u-custom-html-1">
                         <canvas id="top-selling-items"></canvas>
                       </div>
@@ -63,14 +63,14 @@
               <div class="u-size-30">
                 <div class="u-layout-row">
                   <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                    <div class="u-container-layout u-valign-bottom u-container-layout-2">
+                    <div class="u-container-layout u-container-layout-2">
                       <div class="u-clearfix u-custom-html u-custom-html-2">
                         <canvas id="stock-levels"></canvas>
                       </div>
                     </div>
                   </div>
                   <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-3">
-                    <div class="u-container-layout u-valign-bottom u-container-layout-3">
+                    <div class="u-container-layout u-container-layout-3">
                       <div class="u-clearfix u-custom-html u-custom-html-3">
                         <canvas id="profit-margins"></canvas>
                       </div>
@@ -89,5 +89,5 @@
       </div>
     </footer>
 
-    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Inventory-Analytics.js') }}" defer=""></script>
+      <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Inventory-Analytics.js') }}" defer=""></script>
 </body></html>

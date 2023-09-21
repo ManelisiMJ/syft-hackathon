@@ -4,8 +4,43 @@ let url = `/sales-analytics/total-revenue`
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        new Chart("revenue-over-time", data)
+        new Chart("revenue-over-time", {
+            type: "line",
+            data: {
+                labels: data[0],
+                datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: data[1]
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Total Sales over Time",
+                    fontSize: 20
+                },
+                scales: {
+                    xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Months', 
+                        fontSize: 16 
+                    }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Sales Amount', 
+                            fontSize: 16 
+                        }
+                    }]
+                }
+            }
+        })
       })
     .catch(error => {
         console.log('There was a problem with the fetch operation:', error)
