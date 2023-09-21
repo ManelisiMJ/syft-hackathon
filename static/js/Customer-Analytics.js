@@ -24,7 +24,8 @@ let url = `/customer-analytics/customer-composition`
             options: {
               title: {
                 display: true,
-                text: "Contacts Composition"
+                text: "Contacts Composition",
+                fontSize: 20
               }
             }
         })

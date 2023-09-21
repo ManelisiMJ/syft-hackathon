@@ -52,7 +52,6 @@ let url2 = `/sales-analytics/revenue-by-customer`
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         let xArray = data[0]
         let yArray = data[1]
         let zArray = data[2]
@@ -71,9 +70,9 @@ let url2 = `/sales-analytics/revenue-by-customer`
             tooltips: {
                 callbacks: {
                     label: function (tooltipItem, data) {
-                        var index = tooltipItem.index;
-                        var purchaseCount = zArray[index]; 
-                        return 'Total Spending: $' + tooltipItem.yLabel + ' | Purchases: ' + purchaseCount;
+                        let index = tooltipItem.index;
+                        let purchaseCount = zArray[index]; 
+                        return 'Total Spending: R' + tooltipItem.yLabel + ' | Purchases: ' + purchaseCount;
                     }
                 }
             },

@@ -340,15 +340,14 @@ def totalRevenueOverTime():
     results = selectFromDatabase(query)
     return (extractTwoDimestions(results))
      
-
 def topSellingItems():
-    query = """SELECT item_code, name, SUM(quantity) AS total_sold
+    query = """SELECT name, SUM(quantity) AS total_sold, item_code
     FROM InvoiceLine, Item
     WHERE InvoiceLine.item_code = Item.code
     GROUP BY item_code
     ORDER BY total_sold DESC;"""
     results = selectFromDatabase(query)
-    print(results)
+    return extractThreeDimensions(results)
 
 def outstandingSalesInvoices():
     query = """SELECT Contact.id, name, round(SUM(amount_due), 2)
@@ -359,13 +358,13 @@ def outstandingSalesInvoices():
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
 
-def outstandingPurchaseInvoices():
-    query = """SELECT id, amount_due
-    FROM Invoice
-    WHERE paid = 0 and is_sale = 0
-    ORDER BY due_date;"""
-    results = selectFromDatabase(query)
-    print(results)
+# def outstandingPurchaseInvoices():
+#     query = """SELECT id, amount_due
+#     FROM Invoice
+#     WHERE paid = 0 and is_sale = 0
+#     ORDER BY due_date;"""
+#     results = selectFromDatabase(query)
+#     print(results)
 
 def customerSegregation():
     query = """SELECT name, round(SUM(total),2) AS total_purchases, COUNT(DISTINCT Invoice.id) AS total_orders
@@ -387,24 +386,23 @@ def paymentTrends():
     results = selectFromDatabase(query)
     return extractTwoDimestions(results)
     
-
-def currencyExchange():
-    query = """SELECT currency, AVG(exchange_rate) AS avg_exchange_rate
-    FROM Invoice
-    WHERE is_sale = true
-    GROUP BY currency;
-    """
-    results = selectFromDatabase(query)
-    print(results)
+# def currencyExchange():
+#     query = """SELECT currency, AVG(exchange_rate) AS avg_exchange_rate
+#     FROM Invoice
+#     WHERE is_sale = true
+#     GROUP BY currency;
+#     """
+#     results = selectFromDatabase(query)
+#     print(results)
 
 def profitMargin():
-    query = """SELECT item_code, (SUM(total) - SUM(quantity * purchase_unit_price)) / SUM(total) AS profit_margin
+    query = """SELECT name, (SUM(total) - SUM(quantity * purchase_unit_price)) / SUM(total) AS profit_margin, item_code
     FROM InvoiceLine, Item
     WHERE InvoiceLine.item_code = Item.code
     GROUP BY item_code;
     """
     results = selectFromDatabase(query)
-    print(results)
+    return extractThreeDimensions(results)
 
 def customerComposition():
     query = '''SELECT
@@ -423,6 +421,13 @@ def customerComposition():
         values.append(result[2])
         values.append(result[3])
     return values
+
+def stockLevels():
+    query = '''SELECT name, quantity_on_hand, code
+    FROM Item
+    ORDER BY quantity_on_hand DESC'''
+    results = selectFromDatabase(query)
+    return extractThreeDimensions(results)
 
 #########################################################################################################
 ############################################################################################################
@@ -488,6 +493,18 @@ def customerPaymentTrends():
 @app.route('/customer-analytics/outstanding-invoices', methods=['GET'])
 def customerOutstandingInvoices():
     return jsonify(outstandingSalesInvoices())
+
+@app.route('/inventory-analytics/top-items', methods=['GET'])
+def topItems():
+    return jsonify(topSellingItems())
+
+@app.route('/inventory-analytics/profit-margins', methods=['GET'])
+def itemsProfitMargins():
+    return jsonify(profitMargin())
+
+@app.route('/inventory-analytics/stock-levels', methods=['GET'])
+def itemsLevels():
+    return jsonify(stockLevels())
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000) #Start server
