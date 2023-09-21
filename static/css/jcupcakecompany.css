@@ -3,6 +3,9 @@
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2021 Froala Labs
  */
+.span{
+  cursor: pointer;
+}
 
 .fr-clearfix::after {
   clear: both;
@@ -41641,12 +41644,13 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-header .u-menu-1 {
-  margin: -63px 39px 34px auto;
+  margin: -63px 39px 50px auto;
 }
 
 .u-header .u-nav-1 {
   font-size: 1rem;
   letter-spacing: normal;
+  font-weight: normal;
 }
 
 .u-header .u-nav-2 {
@@ -41664,15 +41668,48 @@ a.u-link.u-text-hover-grey-90:hover {
     margin-right: 39px;
   }
 }
+@media (max-width: 991px) {
+  .u-header .u-menu-1 {
+    margin-top: -61px;
+    margin-right: 16px;
+    margin-bottom: 34px;
+  }
 
+  .u-header .u-nav-1 {
+    letter-spacing: 0px;
+    font-weight: 700;
+  }
+}
 @media (max-width: 767px) {
   .u-header .u-text-1 {
     font-size: 1rem;
   }
+
+  .u-header .u-menu-1 {
+    margin-top: -61px;
+  }
 }
 @media (max-width: 575px) {
+  .u-header .u-sheet-1 {
+    min-height: 142px;
+  }
+
+  .u-header .u-image-1 {
+    margin-top: 22px;
+  }
+
   .u-header .u-text-1 {
-    margin-left: 110px;
+    font-size: 0.875rem;
+    width: auto;
+    margin-top: -61px;
+    margin-right: 60px;
+    margin-left: auto;
+  }
+
+  .u-header .u-menu-1 {
+    margin-top: -31px;
+    margin-right: 0;
+    margin-bottom: 50px;
   }
 }
  .u-footer {

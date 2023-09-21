@@ -1,6 +1,9 @@
-import SERVER_IP from './config.js'
+const apps1Btn = document.getElementById('apps-1')
+    apps1Btn.addEventListener('click', () => {
+    window.location.href = `/apps`
+})
 
-const appsBtn = document.getElementById('apps')
-    appsBtn.addEventListener('click', () => {
-    window.location.href = `${SERVER_IP}/apps`
-});
+const apps2Btn = document.getElementById('apps-2')
+    apps2Btn.addEventListener('click', () => {
+    window.location.href = `/apps`
+})

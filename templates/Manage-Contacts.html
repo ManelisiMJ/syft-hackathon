@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en"><head>
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Manage Business Partners">
@@ -21,66 +20,66 @@
           <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="u-logo-image u-logo-image-1">
         </div>
         <p class="u-custom-font u-heading-font u-text u-text-default u-text-palette-1-base u-text-1">J's Cupcake Company </p>
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
-          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 700;">
+            <a class="u-button-style u-custom-border u-custom-border-color u-custom-borders u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#" style="padding: 8px 0px; font-size: calc(1em + 18px);">
               <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
+              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"style="padding: 18px 34px;">Home</span></li><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;">Apps</span></li></ul>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"style="padding: 18px 34px;" id="home-1">Home</span>
+            </li><li class="u-nav-item"><span class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" style="padding: 18px 34px;" id="apps-1">Apps</span></li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><span class="u-button-style u-nav-link">Home</span></li><li class="u-nav-item"><span class="u-button-style u-nav-link">Apps</span></li></ul>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><span class="u-button-style u-nav-link" id="home-2">Home</span></li><li class="u-nav-item"><span class="u-button-style u-nav-link" id="apps-2">Apps</span></li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
       </div></header>
-      <section class="u-border-2 u-border-grey-75 u-clearfix u-section-1" id="sec-17e6">
-        <div class="u-clearfix u-sheet u-sheet-1">
-          <h2 class="u-text u-text-default u-text-1">Manage Contacts</h2>
-          <h4 class="u-text u-text-palette-1-base u-text-2">Filters</h4>
-          <div class="u-clearfix u-custom-html u-custom-html-1">
-            <input id="id" type="text">
-          </div>
-          <div class="u-clearfix u-custom-html u-custom-html-2">
-            <select name="role" id="role" style="width: 170px; height: 32px;">
-              <option value=""></option>
-              <option value="Customer">Customer</option>
-              <option value="Supplier">Supplier</option>
-              <option value="Both">Customer & Supplier</option>
-              <option value="None">Neither</option>
-            </select>
-          </div>
-          <div class="u-clearfix u-custom-html u-custom-html-3">
-            <input id="email" type="text">
-          </div>
-          <div class="u-clearfix u-custom-html u-custom-html-4">
-            <input id="name" type="text">
-          </div>
-          <h6 class="u-text u-text-default u-text-3">Email</h6>
-          <h6 class="u-text u-text-default u-text-4">ID</h6>
-          <h6 class="u-text u-text-default u-text-5">Role</h6>
-          <h6 class="u-text u-text-default u-text-6">Name</h6>
-          <div class="u-clearfix u-custom-html u-custom-html-5">
-            <input id="phone" type="text">
-          </div>
-          <button id="show-all" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Show all</button>
-          <button id="apply-filter" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">Apply filters</button>
-          <h6 class="u-text u-text-default u-text-7">Phone</h6>
+    <section class="u-border-3 u-border-grey-75 u-border-no-left u-border-no-right u-border-no-top u-clearfix u-section-1" id="sec-17e6">
+      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-xs u-sheet-1">
+        <h2 class="u-text u-text-default u-text-1">Manage Contacts</h2>
+        <h4 class="u-text u-text-palette-1-base u-text-2">Filters</h4>
+        <div class="u-clearfix u-custom-html u-custom-html-1">
+          <input id="id" type="text">
         </div>
-      </section>
+        <div class="u-clearfix u-custom-html u-custom-html-2">
+          <select name="role" id="role" style="width: 170px; height: 32px;">
+            <option value=""></option>
+            <option value="Customer">Customer</option>
+            <option value="Supplier">Supplier</option>
+            <option value="Both">Customer & Supplier</option>
+            <option value="None">Neither</option>
+          </select>
+        </div>
+        <div class="u-clearfix u-custom-html u-custom-html-3">
+          <input id="email" type="text">
+        </div>
+        <div class="u-clearfix u-custom-html u-custom-html-4">
+          <input id="name" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-3">Email</h6>
+        <h6 class="u-text u-text-default u-text-4">ID</h6>
+        <h6 class="u-text u-text-default u-text-5">Role</h6>
+        <h6 class="u-text u-text-default u-text-6">Name</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-5">
+          <input id="phone" type="text">
+        </div>
+        <button id="show-all" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Show all</button>
+        <button id="apply-filter" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">Apply filters</button>
+        <h6 class="u-text u-text-default u-text-7">Phone</h6>
+      </div>
+    </section>
     <section class="u-align-center u-clearfix u-section-2" id="sec-5d0e">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h3 class="u-text u-text-default u-text-1" style="margin-top: 20px;">Business Contacts</h3>
-        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
+        <h3 class="u-text u-text-default u-text-1">Contacts</h3>
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
           <table class="u-table-entity u-table-entity-1">
             <colgroup>
               <col width="16.6%">
@@ -107,47 +106,46 @@
         </div>
       </div>
     </section>
-  </section>
-  <section class="u-clearfix u-section-3" id="sec-4940">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <div class="u-clearfix u-custom-html u-custom-html-1">
-        <input id="new-id" type="text">
-      </div>
-      <h6 class="u-text u-text-1">ID</h6>
-      <div class="u-clearfix u-custom-html u-custom-html-2">
-        <input id="new-name" type="text">
-      </div>
-      <h6 class="u-text u-text-default u-text-2">Name</h6>
-      <h6 class="u-text u-text-default u-text-3">Email</h6>
-      <div class="u-clearfix u-custom-html u-custom-html-3">
-        <input id="new-email" type="text">
-      </div>
-      <h6 class="u-text u-text-default u-text-4">Phone</h6>
-      <div class="u-clearfix u-custom-html u-custom-html-4">
-        <input id="new-phone" type="text">
-      </div>
-      <h6 class="u-text u-text-default u-text-5">Is_Customer</h6>
-      <div class="u-clearfix u-custom-html u-custom-html-5">
-        <select name="new-is-customer" id="new-is-customer" style="width: 192px; height: 32px;">
-          <option value="1">True</option>
-          <option value="0">False</option>
-        </select>
-      </div>
-      <h6 class="u-text u-text-default u-text-6">Is-Supplier</h6>
-      <div class="u-clearfix u-custom-html u-custom-html-6">
-        <select name="new-is-supplier" id="new-is-supplier" style="width: 192px; height: 32px;">
-          <option value="1">True</option>
-          <option value="0">False</option>
-        </select>
-      </div>
-      <button id="update" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">update details</button>
+    <section class="u-clearfix u-section-3" id="sec-4940">
+      <div class="u-clearfix u-sheet u-valign-middle-lg u-sheet-1">
+        <div class="u-clearfix u-custom-html u-custom-html-1">
+          <input id="new-id" type="text">
+        </div>
+        <h6 class="u-text u-text-1">ID</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-2">
+          <input id="new-name" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-2">Name</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-3">
+          <input id="new-email" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-3">Email</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-4">
+          <input id="new-phone" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-4">Phone</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-5">
+          <input id="new-is-customer" type="text">
+        </div>
+        <h6 class="u-text u-text-default u-text-5">Is_Customer</h6>
+        <div class="u-clearfix u-custom-html u-custom-html-6">
+          <select name="new-is-supplier" id="new-is-supplier" style="width: 192px; height: 32px;">
+            <option value="1">True</option>
+            <option value="0">False</option>
+          </select>
+        </div>
+        <h6 class="u-text u-text-default u-text-6">Is_Supplier</h6>
+        <button id="update" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">update details</button>
       <button id="new" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-base u-palette-4-light-1 u-radius-50 u-btn-2">new contact</button>
-    </div>
-  </section>
+      </div>
+    </section>
+    
+    
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">SAP@J's Cupcake Company | Ncube Manelisi</p>
       </div>
-    </footer>
-    <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Manage-Contacts.js') }}"></script>
+  </footer>
+  <script type="module" type="text/javascript" src="{{ url_for('static', filename='js/Manage-Contacts.js') }}"></script>
+    
 </body></html>

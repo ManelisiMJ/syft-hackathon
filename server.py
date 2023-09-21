@@ -6,7 +6,7 @@ from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_cors import CORS, cross_origin
 
 db_name = "JCupcakeCompany.sqlite"
-app = Flask(__name__)       #Instantiate server
+app = Flask(__name__, template_folder='./templates')       #Instantiate server
 
 ###################################################################################################################
 #######################################HELPER METHODS#######################################################
@@ -65,6 +65,26 @@ def createInvoiceDictionary(invoices):
             }
             data_dict_list.append(data_dict)
     return data_dict_list
+
+def extractTwoDimestions(results):
+    xArray = []
+    yArray = []
+    if results is not None:
+        for row in results:
+            xArray.append(row[0])
+            yArray.append(row[1])
+    return xArray, yArray
+
+def extractThreeDimensions(results):
+    xArray = []
+    yArray = []
+    zArray = []
+    if results is not None:
+        for row in results:
+            xArray.append(row[0])
+            yArray.append(row[1])
+            zArray.append(row[2])
+    return xArray, yArray, zArray
 ###############################################################################################################
 #################################################DB CRUD OPERATIONS##########################################
 ############################################################################################################
@@ -311,7 +331,113 @@ def updateInventory():
 #########################################################################################################
 ##########################################DATA ANALYTICS#################################################
 #########################################################################################################
+def totalRevenueOverTime():
+    query = """SELECT strftime('%Y-%m', issue_date) AS month, SUM(total) AS total_revenue
+    FROM Invoice
+    WHERE is_sale = 1
+    GROUP BY month
+    ORDER BY month;"""
+    results = selectFromDatabase(query)
+    xArray, yArray = extractTwoDimestions(results)
+    return {
+            'type': "line",
+            'data': {
+                'labels': xArray,
+                'datasets': [{
+                'fill': False,
+                'lineTension': 0,
+                'backgroundColor': "rgba(0,0,255,1.0)",
+                'borderColor': "rgba(0,0,255,0.1)",
+                'data': yArray
+                }]
+            },
+            'options': {
+                'legend': {'display': False},
+                'title': {
+                    'display': True,
+                    'text': "Total Sales over Time",
+                    'fontSize': 20
+                },
+                'scales': {
+                    'xAxes': [{
+                    'scaleLabel': {
+                        'display': True,
+                        'labelString': 'Months', 
+                        'fontSize': 16 
+                    }
+                    }],
+                    'yAxes': [{
+                        'scaleLabel': {
+                            'display': True,
+                            'labelString': 'Sales Amount', 
+                            'fontSize': 16 
+                        }
+                    }]
+                }
+            }
+    }
 
+def topSellingItems():
+    query = """SELECT item_code, name, SUM(quantity) AS total_sold
+    FROM InvoiceLine, Item
+    WHERE InvoiceLine.item_code = Item.code
+    GROUP BY item_code
+    ORDER BY total_sold DESC;"""
+    results = selectFromDatabase(query)
+    print(results)
+
+def outstandingSalesInvoices():
+    query = """SELECT id, amount_due
+    FROM Invoice
+    WHERE paid = 0 and is_sale = 1
+    ORDER BY due_date;"""
+    results = selectFromDatabase(query)
+
+def outstandingPurchaseInvoices():
+    query = """SELECT id, amount_due
+    FROM Invoice
+    WHERE paid = 0 and is_sale = 0
+    ORDER BY due_date;"""
+    results = selectFromDatabase(query)
+    print(results)
+
+def customerSegregation():
+    query = """SELECT name, round(SUM(total),2) AS total_purchases, COUNT(DISTINCT Invoice.id) AS total_orders
+    FROM Invoice, Contact
+    WHERE is_sale = 1 and Invoice.contact_id = Contact.id
+    GROUP BY contact_id
+    ORDER BY total_purchases DESC
+    """
+    results = selectFromDatabase(query)
+    return extractThreeDimensions(results)
+
+def paymentTrends():
+    query = """SELECT strftime('%Y-%m', date) AS month, SUM(total) AS total_payments
+    FROM Payment
+    WHERE is_income = 1
+    GROUP BY month
+    ORDER BY month;
+    """
+    results = selectFromDatabase(query)
+    print(results)
+
+def currencyExchange():
+    query = """SELECT currency, AVG(exchange_rate) AS avg_exchange_rate
+    FROM Invoice
+    WHERE is_sale = true
+    GROUP BY currency;
+    """
+    results = selectFromDatabase(query)
+    print(results)
+
+def profitMargin():
+    query = """SELECT item_code, (SUM(total) - SUM(quantity * purchase_unit_price)) / SUM(total) AS profit_margin
+    FROM InvoiceLine, Item
+    WHERE InvoiceLine.item_code = Item.code
+    GROUP BY item_code;
+    """
+    results = selectFromDatabase(query)
+    print(results)
 
 
 #########################################################################################################
@@ -319,11 +445,54 @@ def updateInventory():
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('Home.html')     #Home page
+    xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    yValues = [55, 49, 44, 24, 15];
+    barColors = ["red", "green","blue","orange","brown"];
+
+    chart = {
+    'type': "bar",
+        'data': {
+            'labels': xValues,
+            'datasets': [{
+            'backgroundColor': barColors,
+            'data': yValues
+            }]
+        },
+        'options': {
+            'legend': {'display': False},
+            'title': {
+                'display': True,
+                'text': "World Wine Production 2018",
+                'fontSize': 20
+            }
+        }
+    }
+    return render_template('Home.html', chart = chart)     #Home page
 
 @app.route('/apps', methods=['GET'])
 def apps():
     return render_template('Apps.html')     #Apps page
 
+@app.route('/inventory-analytics', methods=['GET'])
+def inventoryAnalytics():
+    return render_template('Inventory.html')
+
+@app.route('/customer-analytics', methods=['GET'])
+def customersAnalytics():
+    return render_template('Customers.html')
+
+@app.route('/sales-analytics', methods=['GET'])
+def salesRevenue():
+    return render_template('Sales-and-Revenue.html')
+
+@app.route('/sales-analytics/total-revenue', methods=['GET'])
+def sales():
+    return jsonify(totalRevenueOverTime())
+
+@app.route('/sales-analytics/revenue-by-customer', methods=['GET'])
+def salesByCustomer():
+    return jsonify(customerSegregation())
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000))) #Start server
+    app.run(host='0.0.0.0', port=5000) #Start server
+    #customerSegregation()

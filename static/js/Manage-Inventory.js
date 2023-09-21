@@ -1,4 +1,23 @@
-import SERVER_IP from './config.js'
+//Home and Apps menu button
+const homeBtn1 = document.getElementById("home-1")
+const homeBtn2 = document.getElementById("home-2")
+const appsBtn1 = document.getElementById("apps-1")
+const appsBtn2 = document.getElementById("apps-2")
+homeBtn1.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+homeBtn2.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+appsBtn1.addEventListener("click", ()=>{
+    window.location.href = `/apps`
+})
+  
+appsBtn2.addEventListener("click", ()=>{
+window.location.href = `/apps`
+})
 
 const codeBox = document.getElementById("code")
 const nameBox = document.getElementById("name")
@@ -36,7 +55,7 @@ newBtn.addEventListener("click", ()=>{
     if (isNaN(newItem.purchase_unit_price) || isNaN(newItem.sale_unit_price))   //Invalid amounts
         window.alert("Please enter valid amounts for prices")
     else if (newItem.id!="" && newItem.name!="" && newItem.code!=""){
-        let url = `${SERVER_IP}/manage-inventory/add`   //Send request
+        let url = `/manage-inventory/add`   //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -63,7 +82,7 @@ updateBtn.addEventListener("click", ()=>{
     if (isNaN(updatedItem.purchase_unit_price) || isNaN(updatedItem.sale_unit_price))   //Invalid amounts
         window.alert("Please enter valid amounts for prices")
     else if (updatedItem.id!="" && updatedItem.name!="" && updatedItem.code!=""){
-        let url = `${SERVER_IP}/manage-inventory/update`    //Send request
+        let url = `/manage-inventory/update`    //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {

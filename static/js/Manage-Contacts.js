@@ -1,4 +1,26 @@
-import SERVER_IP from './config.js'
+//Home and Apps menu button
+const homeBtn1 = document.getElementById("home-1")
+const homeBtn2 = document.getElementById("home-2")
+const appsBtn1 = document.getElementById("apps-1")
+const appsBtn2 = document.getElementById("apps-2")
+homeBtn1.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+homeBtn2.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+appsBtn1.addEventListener("click", ()=>{
+    window.location.href = `/apps`
+})
+  
+appsBtn2.addEventListener("click", ()=>{
+window.location.href = `/apps`
+})
+
+
+
 const nameInput = document.getElementById('name')
 const emailInput = document.getElementById('email')
 const roleInput = document.getElementById('role')
@@ -8,7 +30,7 @@ const contactsTable = document.getElementById("contacts-table")
 const showAllBtn = document.getElementById('show-all')
 
 showAllBtn.addEventListener('click', ()=> {
-    let url = `${SERVER_IP}/manage-contacts/query-all`  //Send request
+    let url = `/manage-contacts/query-all`  //Send request
     fetch(url, {
     method: 'GET', 
     })
@@ -61,7 +83,7 @@ const filterBtn = document.getElementById('apply-filter')
         window.alert("Please give filter criteria")
     }
     else{
-        let url = `${SERVER_IP}/manage-contacts/query`  //Send request
+        let url = `/manage-contacts/query`  //Send request
         fetch(url, {
             method: 'POST',
             headers: {
@@ -120,7 +142,7 @@ newCustomerBtn.addEventListener("click", ()=>{
         newUser.is_supplier = Number(is_supplier)   //Convert true/false to 0/1
         newUser.is_customer = Number(is_customer)
 
-        let url = `${SERVER_IP}/manage-contacts/new-contact`    //Send request
+        let url = `/manage-contacts/new-contact`    //Send request
         fetch(url, {
             method: 'POST',
             headers: {
@@ -166,7 +188,7 @@ updateCustomerBtn.addEventListener("click", ()=>{
         updatedUser.is_customer = is_customer
         console.log(updatedUser)
         
-        let url = `${SERVER_IP}/manage-contacts/update-contact`     //Send request
+        let url = `/manage-contacts/update-contact`     //Send request
         fetch(url, {
             method: 'POST',
             headers: {

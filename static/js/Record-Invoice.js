@@ -1,4 +1,23 @@
-import SERVER_IP from './config.js'
+//Home and Apps menu button
+const homeBtn1 = document.getElementById("home-1")
+const homeBtn2 = document.getElementById("home-2")
+const appsBtn1 = document.getElementById("apps-1")
+const appsBtn2 = document.getElementById("apps-2")
+homeBtn1.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+homeBtn2.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+appsBtn1.addEventListener("click", ()=>{
+    window.location.href = `/apps`
+})
+  
+appsBtn2.addEventListener("click", ()=>{
+window.location.href = `/apps`
+})
 
 const lineInvoiceId = document.getElementById("invoice-id")
 const addBtn = document.getElementById("add-line")
@@ -31,7 +50,7 @@ createBtn.addEventListener("click", ()=>{
             }
             newInvoice.is_sale = (type == "Sale")? 1: 0 //Convert to 0/1
 
-            let url = `${SERVER_IP}/record-invoice/new-invoice` //Send request
+            let url = `/record-invoice/new-invoice` //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -78,7 +97,7 @@ addBtn.addEventListener("click", ()=>{      //Adds a line item to an invoice
                 quantity:quantity
             }
             
-            let url = `${SERVER_IP}/record-invoice/new-invoice-line`    //Send request
+            let url = `/record-invoice/new-invoice-line`    //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {

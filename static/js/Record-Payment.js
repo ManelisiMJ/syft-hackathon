@@ -1,4 +1,23 @@
-import SERVER_IP from './config.js'
+//Home and Apps menu button
+const homeBtn1 = document.getElementById("home-1")
+const homeBtn2 = document.getElementById("home-2")
+const appsBtn1 = document.getElementById("apps-1")
+const appsBtn2 = document.getElementById("apps-2")
+homeBtn1.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+homeBtn2.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+appsBtn1.addEventListener("click", ()=>{
+    window.location.href = `/apps`
+})
+  
+appsBtn2.addEventListener("click", ()=>{
+window.location.href = `/apps`
+})
 
 const invoiceIdBox = document.getElementById("invoice-id")
 const amountBox = document.getElementById("amount")
@@ -13,7 +32,7 @@ let sale
 loadBtn.addEventListener("click", ()=>{
     let invoiceId = invoiceIdBox.value
     let query = `Select * from Invoice WHERE id="${invoiceId}"` //Send query to fetch invoice
-    let url = `${SERVER_IP}/record-payment/query`   //Send request
+    let url = `/record-payment/query`   //Send request
         fetch(url, {
             method: 'POST',
             headers: {
@@ -46,7 +65,7 @@ recordBtn.addEventListener("click", ()=>{
             exchange_rate:exchangeRate,
             invoice_id:invoiceIdBox.value
         }
-        let url = `${SERVER_IP}/record-payment/pay`     //Send request to add payment
+        let url = `/record-payment/pay`     //Send request to add payment
         fetch(url, {
             method: 'POST',
             headers: {

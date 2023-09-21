@@ -1,0 +1,148 @@
+.u-section-1 .u-sheet-1 {
+  min-height: 50vw;
+}
+
+.u-section-1 .u-layout-wrap-1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.u-section-1 .u-layout-cell-1 {
+  min-height: 320px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 30px;
+}
+
+.u-section-1 .u-custom-html-1 {
+  height: auto;
+  min-height: 260px;
+  width: 1080px;
+  margin: 0;
+}
+
+.u-section-1 .u-layout-cell-2 {
+  min-height: 320px;
+}
+
+.u-section-1 .u-container-layout-2 {
+  padding: 30px;
+}
+
+.u-section-1 .u-custom-html-2 {
+  height: auto;
+  min-height: 260px;
+  width: 510px;
+  margin: 0;
+}
+
+.u-section-1 .u-layout-cell-3 {
+  min-height: 320px;
+}
+
+.u-section-1 .u-container-layout-3 {
+  padding: 30px;
+}
+
+.u-section-1 .u-custom-html-3 {
+  height: auto;
+  min-height: 260px;
+  width: 510px;
+  margin: 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 264px;
+  }
+
+  .u-section-1 .u-custom-html-1 {
+    width: 410px;
+  }
+
+  .u-section-1 .u-layout-cell-2 {
+    min-height: 264px;
+  }
+
+  .u-section-1 .u-custom-html-2 {
+    width: 410px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 264px;
+  }
+
+  .u-section-1 .u-custom-html-3 {
+    width: 410px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 202px;
+  }
+
+  .u-section-1 .u-custom-html-1 {
+    width: 300px;
+  }
+
+  .u-section-1 .u-layout-cell-2 {
+    min-height: 202px;
+  }
+
+  .u-section-1 .u-custom-html-2 {
+    width: 300px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 202px;
+  }
+
+  .u-section-1 .u-custom-html-3 {
+    width: 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 303px;
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-layout-cell-2 {
+    min-height: 303px;
+  }
+
+  .u-section-1 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 303px;
+  }
+
+  .u-section-1 .u-container-layout-3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-layout-cell-1 {
+    min-height: 191px;
+  }
+
+  .u-section-1 .u-layout-cell-2 {
+    min-height: 191px;
+  }
+
+  .u-section-1 .u-layout-cell-3 {
+    min-height: 191px;
+  }
+}

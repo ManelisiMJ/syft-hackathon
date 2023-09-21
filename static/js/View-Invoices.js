@@ -1,4 +1,23 @@
-import SERVER_IP from './config.js'
+//Home and Apps menu button
+const homeBtn1 = document.getElementById("home-1")
+const homeBtn2 = document.getElementById("home-2")
+const appsBtn1 = document.getElementById("apps-1")
+const appsBtn2 = document.getElementById("apps-2")
+homeBtn1.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+homeBtn2.addEventListener("click", ()=>{
+  window.location.href = `/`
+})
+
+appsBtn1.addEventListener("click", ()=>{
+    window.location.href = `/apps`
+})
+  
+appsBtn2.addEventListener("click", ()=>{
+window.location.href = `/apps`
+})
 
 const filterBtn = document.getElementById("filter")
 const fetchBtn = document.getElementById("fetch")
@@ -49,7 +68,7 @@ filterBtn.addEventListener("click", ()=>{
         window.alert("Please give filter criteria")
     }
     else{
-        let url = `${SERVER_IP}/view-invoices/query`    //Send query
+        let url = `/view-invoices/query`    //Send query
         fetch(url, {
             method: 'POST',
             headers: {
@@ -74,7 +93,7 @@ fetchBtn.addEventListener("click", ()=>{
     else{
         //Query to get invoice lines for the given invoice
         let query = `SELECT * from InvoiceLine WHERE invoice_id="${id}"`    
-        let url = `${SERVER_IP}/view-invoices/query-invoice-lines` //Send request
+        let url = `/view-invoices/query-invoice-lines` //Send request
             fetch(url, {
                 method: 'POST',
                 headers: {
