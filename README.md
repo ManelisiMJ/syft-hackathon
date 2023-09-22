@@ -1,66 +1,38 @@
 # syft-hackathon
 Syft Hackathon 2023 - Round 3 Solution
 
-This is the UCT Computer Science capstone project for the team **ACRONYM**.
+## Value Proposition
+For the project, I have opted to create a miniature version of an SAP Enterprise Resource Planning (ERP) system.  
 
-## Table of Contents
+### Streamlined Operations
+The website offers a centralized platform for managing various aspects of the business, streamlining operations, and improving efficiency. This includes managing invoices, payments, customer information, supplier data, and inventory.
 
-- [Introduction](#introduction)
-- [New Features](#new-features)
-- [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-- [Contributing](#contributing)
-- [License](#license)
+### Enhanced Financial Control
+One of the primary goals of this system is to provide Jodi with better control over financial data. The system allows for recording transactions and presenting all financial information. 
 
-## Introduction
+### Real-time Data Insights
+The application includes interactive dashboards that displays key business data and analytics in real-time. This provides Jodi with valuable insights into the company's performance.
 
-[Grammatical Framework](https://www.grammaticalframework.org/) (GF) is a programming language for writing grammars of
-natural languages.
-GF is capable of parsing and generating texts in several languages simultaneously while working from a
-language-independent representation of meaning.
+### Inventory Management
+The system includes an inventory management application that helps keep track of stock levels. It allows for the efficient management of inventory, ensuring that the company can meet customer demand while minimizing waste.
 
-This Grammatical Framework Minibar (GFM) is an alternative implementation of the GF web
-app [Minibar Online](https://cloud.grammaticalframework.org/minibar/minibar.html).
-GFM is a useful tool for developers working with the Grammatical Framework. GFM provides a graphical user
-interface to interact with and test Grammatical Framewok programs.
+### Transaction Management
+The application enables the creation and storage of transactions and related details, simplifying the process of recording and managing invoices and payments. This feature not only improves accuracy but also saves time by automating repetitive tasks.
 
-## New Features
+### Data Augmentation
+While the system is initially populated with existing transaction data, it offers the flexibility to augment data as needed. Jodi can create new transactions, update customer and supplier information, and adapt the system to evolving business needs.
 
-These are some of the new features implemented in this version of GFM
+## Applications
+These are the applications/features offered by the system
 
-- Offline access
-- Swappable grammars (Use of custom/local grammars)
-- Predictive typing
-- Translation of multiple sentences
-- Easy/intuitive word deletion
+- Manage Contacts - Used to search for, add or edit contact information
+- Record Invoice - Useful for recording new invoices, both received and sent out
+- View Invoices - Makes it easy to search for invoices and retrieve all the info pertaining to an invoice
+- Record Payment - Useful for recording payments and linking them to the corresponding invoices
+- Manage Inventory - Used to maintain inventory information, add new or edit existing stock items
+- Analytics - Analytics applications provide interactive dashboards and visualizations of the data
 
-## Getting Started
-
-[Guide users on how to set up your project locally. Include steps to install necessary dependencies and how to run your project.]
-
-### Prerequisites
-
-- Java Runtime Environment (JRE 8) and Java Development Kit (JDK 17 or JDK 20)
-- Make (Can be downloaded [here](https://www.gnu.org/software/make/))
-
-### Installation
-
-1. Download the source code (zip, tar, tar.gz) and extract all to the required directory
-2. Navigate to the appropriate directory for your operating system
-3. Run the application: For Windows - double click `run.bat`; For Linux - right click run.sh and run as program
-
-## Contributing
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature-name`.
-3. Make your changes and commit them: `git commit -m 'Add some feature'`.
-4. Push to the branch: `git push origin feature-name`.
-5. Create a pull request.
-
-## License
-
-BSD LICENSE - Copyright (c) 1998, Grammatical Framework. All rights reserved.\
-Credit to [Thomas Hallgren](https://cth.altocumulus.org/~hallgren/), the creator of the first GFM.
+## Website
+Find the website [here](http://hello.com) 
 
 
