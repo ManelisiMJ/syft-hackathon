@@ -66,7 +66,8 @@ def createInvoiceDictionary(invoices):
             data_dict_list.append(data_dict)
     return data_dict_list
 
-def extractTwoDimestions(results):
+def extractTwoDimensions(results):
+    '''Takes the results from a query and separates it into the 2 dimensions for graphical visualization'''
     xArray = []
     yArray = []
     if results is not None:
@@ -76,6 +77,7 @@ def extractTwoDimestions(results):
     return xArray, yArray
 
 def extractThreeDimensions(results):
+    '''Takes the results from a query and separates it into the 3 dimensions for graphical visualization'''
     xArray = []
     yArray = []
     zArray = []
@@ -331,75 +333,94 @@ def updateInventory():
 #########################################################################################################
 ##########################################DATA ANALYTICS#################################################
 #########################################################################################################
-def totalRevenueOverTime():
-    query = """SELECT strftime('%Y-%m', issue_date) AS month, SUM(total) AS total_revenue
+def totalRevenueOverTime(condition):
+    whereClause = f"WHERE is_sale = 1"
+    if condition != "":
+        whereClause += f" and issue_date {condition}"
+
+    query = f"""SELECT strftime('%Y-%m', issue_date) AS month, SUM(total) AS total_revenue
     FROM Invoice
-    WHERE is_sale = 1
+    {whereClause}
     GROUP BY month
     ORDER BY month;"""
     results = selectFromDatabase(query)
-    return (extractTwoDimestions(results))
+    return (extractTwoDimensions(results))
      
-def topSellingItems():
-    query = """SELECT name, SUM(quantity) AS total_sold, item_code
+def topSellingItems(condition):
+    havingClause = ""
+    if condition != "":
+        havingClause += f"HAVING total_sold {condition}"
+    query = f"""SELECT name, SUM(quantity) AS total_sold, item_code
     FROM InvoiceLine, Item
     WHERE InvoiceLine.item_code = Item.code
     GROUP BY item_code
+    {havingClause}
     ORDER BY total_sold DESC;"""
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
 
-def outstandingSalesInvoices():
-    query = """SELECT Contact.id, name, round(SUM(amount_due), 2)
+def outstandingSalesInvoices(condition):
+    havingClause = ""
+    if condition != "":
+        havingClause += f"HAVING outstanding_amount {condition}"
+    else:
+        havingClause += "HAVING outstanding_amount > 0"
+    query = f"""SELECT Contact.id, name, round(SUM(amount_due), 2) AS outstanding_amount
     FROM Invoice, Contact
     WHERE paid = 0 and is_sale = 1 and Invoice.contact_id = Contact.id
     GROUP BY Contact.id
-    HAVING Sum(amount_due) > 0"""
+    {havingClause}
+    ORDER BY outstanding_amount DESC"""
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
 
-# def outstandingPurchaseInvoices():
-#     query = """SELECT id, amount_due
-#     FROM Invoice
-#     WHERE paid = 0 and is_sale = 0
-#     ORDER BY due_date;"""
-#     results = selectFromDatabase(query)
-#     print(results)
+def outstandingPurchaseInvoices():
+    query = """SELECT name, round(SUM(amount_due), 2)
+    FROM Invoice, Contact
+    WHERE paid = 0 and is_sale = 0 and Invoice.contact_id = Contact.id
+    GROUP BY Contact.id
+    HAVING Sum(amount_due) > 0"""
+    results = selectFromDatabase(query)
+    return extractTwoDimensions(results)
 
-def customerSegregation():
-    query = """SELECT name, round(SUM(total),2) AS total_purchases, COUNT(DISTINCT Invoice.id) AS total_orders
+def customerSegregation(condition):
+    havingClause = ""
+    if condition != "":
+        havingClause += f"HAVING total_purchases {condition}"
+    query = f"""SELECT name, round(SUM(total),2) AS total_purchases, COUNT(DISTINCT Invoice.id) AS total_orders
     FROM Invoice, Contact
     WHERE is_sale = 1 and Invoice.contact_id = Contact.id
     GROUP BY contact_id
-    ORDER BY total_purchases DESC
+    {havingClause}
+    ORDER BY total_purchases DESC;
     """
+    print(query)
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
 
-def paymentTrends():
-    query = """SELECT strftime('%Y-%m', date) AS month, SUM(total) AS total_payments
+def paymentTrends(condition):
+    whereClause = f"WHERE is_income = 1"
+    if condition != "":
+        whereClause += f" and date {condition}"
+    query = f"""SELECT strftime('%Y-%m', date) AS month, SUM(total) AS total_payments
     FROM Payment
-    WHERE is_income = 1
+    {whereClause}
     GROUP BY month
     ORDER BY month;
     """
     results = selectFromDatabase(query)
-    return extractTwoDimestions(results)
-    
-# def currencyExchange():
-#     query = """SELECT currency, AVG(exchange_rate) AS avg_exchange_rate
-#     FROM Invoice
-#     WHERE is_sale = true
-#     GROUP BY currency;
-#     """
-#     results = selectFromDatabase(query)
-#     print(results)
+    return extractTwoDimensions(results)
 
-def profitMargin():
-    query = """SELECT name, (SUM(total) - SUM(quantity * purchase_unit_price)) / SUM(total) AS profit_margin, item_code
+def profitMargin(condition):
+    havingClause = ""
+    if condition != "":
+        havingClause += f"HAVING profit_margin {condition}"
+    query = f"""SELECT name, (SUM(total) - SUM(quantity * purchase_unit_price)) / SUM(total) AS profit_margin, item_code
     FROM InvoiceLine, Item
     WHERE InvoiceLine.item_code = Item.code
-    GROUP BY item_code;
+    GROUP BY item_code
+    {havingClause}
+    ORDER BY profit_margin DESC;
     """
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
@@ -422,45 +443,20 @@ def customerComposition():
         values.append(result[3])
     return values
 
-def stockLevels():
-    query = '''SELECT name, quantity_on_hand, code
+def stockLevels(condition):
+    whereClause = ""
+    if condition != "":
+        whereClause += f"WHERE quantity_on_hand {condition}"
+    query = f'''SELECT name, quantity_on_hand, code
     FROM Item
+    {whereClause}
     ORDER BY quantity_on_hand DESC'''
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
 
 #########################################################################################################
-############################################################################################################
-
-@app.route('/', methods=['GET'])
-def home():
-    xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    yValues = [55, 49, 44, 24, 15];
-    barColors = ["red", "green","blue","orange","brown"];
-
-    chart = {
-    'type': "bar",
-        'data': {
-            'labels': xValues,
-            'datasets': [{
-            'backgroundColor': barColors,
-            'data': yValues
-            }]
-        },
-        'options': {
-            'legend': {'display': False},
-            'title': {
-                'display': True,
-                'text': "World Wine Production 2018",
-                'fontSize': 20
-            }
-        }
-    }
-    return render_template('Home.html', chart = chart)     #Home page
-
-@app.route('/apps', methods=['GET'])
-def apps():
-    return render_template('Apps.html')     #Apps page
+######################################DATA ANALYTICS API ENDPOINTS#######################################
+#########################################################################################################
 
 @app.route('/inventory-analytics', methods=['GET'])
 def inventoryAnalytics():
@@ -474,37 +470,92 @@ def customersAnalytics():
 def salesRevenue():
     return render_template('Sales-and-Revenue.html')
 
-@app.route('/sales-analytics/total-revenue', methods=['GET'])
+@app.route('/sales-analytics/total-revenue', methods=['POST'])
 def sales():
-    return jsonify(totalRevenueOverTime())
+    condition = request.get_json()
+    return jsonify(totalRevenueOverTime(condition))
 
-@app.route('/sales-analytics/revenue-by-customer', methods=['GET'])
+@app.route('/sales-analytics/revenue-by-customer', methods=['POST'])
 def salesByCustomer():
-    return jsonify(customerSegregation())
+    condition = request.get_json()
+    return jsonify(customerSegregation(condition))
 
 @app.route('/customer-analytics/customer-composition', methods=['GET'])
 def composition():
     return jsonify(customerComposition())
 
-@app.route('/customer-analytics/payment-trends', methods=['GET'])
+@app.route('/customer-analytics/payment-trends', methods=['POST'])
 def customerPaymentTrends():
-    return jsonify(paymentTrends())
+    condition = request.get_json()
+    return jsonify(paymentTrends(condition))
 
-@app.route('/customer-analytics/outstanding-invoices', methods=['GET'])
+@app.route('/customer-analytics/outstanding-invoices', methods=['POST'])
 def customerOutstandingInvoices():
-    return jsonify(outstandingSalesInvoices())
+    condition = request.get_json()
+    return jsonify(outstandingSalesInvoices(condition))
 
-@app.route('/inventory-analytics/top-items', methods=['GET'])
+@app.route('/inventory-analytics/top-items', methods=['POST'])
 def topItems():
-    return jsonify(topSellingItems())
+    condition = request.get_json()
+    return jsonify(topSellingItems(condition))
 
-@app.route('/inventory-analytics/profit-margins', methods=['GET'])
+@app.route('/inventory-analytics/profit-margins', methods=['POST'])
 def itemsProfitMargins():
-    return jsonify(profitMargin())
+    condition = request.get_json()
+    return jsonify(profitMargin(condition))
 
-@app.route('/inventory-analytics/stock-levels', methods=['GET'])
+@app.route('/inventory-analytics/stock-levels', methods=['POST'])
 def itemsLevels():
-    return jsonify(stockLevels())
+    condition = request.get_json()
+    return jsonify(stockLevels(condition))
+
+############################################################################################################
+############################################################################################################
+
+@app.route('/', methods=['GET'])
+def home():
+    xValues, yValues = outstandingPurchaseInvoices()
+    barColors = ["red", "lightblue","blue","aqua","yellow", "red", "lightblue","blue","aqua","yellow"]
+
+    chart = {           #Chart to display on the home page
+    'type': "bar",
+        'data': {
+            'labels': xValues,
+            'datasets': [{
+            'backgroundColor': barColors,
+            'data': yValues
+            }]
+        },
+        'options': {
+            'legend': {'display': False},
+            'title': {
+                'display': True,
+                'text': "Creditors",
+                'fontSize': 20
+            },
+            'scales':{
+                'xAxes': [{
+                        'scaleLabel': {
+                            'display': True,
+                            'labelString': 'Supplier', 
+                            'fontSize': 16 
+                        }
+                    }],
+                'yAxes': [{
+                    'scaleLabel': {
+                        'display': True,
+                        'labelString': 'Amount Owed (R)', 
+                        'fontSize': 16 
+                    }
+                }]
+            }
+        }
+    }
+    return render_template('Home.html', chart = chart)     #Home page with embedded chart
+
+@app.route('/apps', methods=['GET'])
+def apps():
+    return render_template('Apps.html')     #Apps page
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000) #Start server

@@ -5,7 +5,6 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>Customers</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jcupcakecompany.css') }}" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Customers.css') }}" media="screen">
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" defer=""></script>
@@ -45,54 +44,71 @@
           </div>
         </nav>
       </div></header>
-    <section class="u-clearfix u-section-1" id="sec-66f0">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-col">
-              <div class="u-size-30">
-                <div class="u-layout-row">
-                  <div class="u-container-style u-layout-cell u-size-23 u-layout-cell-1">
-                    <div class="u-container-layout u-valign-bottom u-container-layout-1">
-                      <div class="u-clearfix u-custom-html u-custom-html-1">
-                        <canvas id="contact-composition"></canvas>
+      <section class="u-clearfix u-section-1" id="sec-66f0">
+        <div class="u-clearfix u-sheet u-sheet-1">
+          <div class="data-layout-selected u-clearfix u-layout-wrap u-layout-wrap-1">
+            <div class="u-layout">
+              <div class="u-layout-col">
+                <div class="u-size-30">
+                  <div class="u-layout-row">
+                    <div class="u-container-style u-layout-cell u-size-23 u-layout-cell-1">
+                      <div class="u-container-layout u-container-layout-1">
+                        <div class="u-clearfix u-custom-html u-custom-html-1">
+                          <canvas id="contact-composition"></canvas>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="u-container-style u-layout-cell u-size-37 u-layout-cell-2">
-                    <div class="u-container-layout u-container-layout-2">
-                      <div class="u-clearfix u-custom-html u-custom-html-2">
-                        <canvas id="payment-trends"></canvas>
+                    <div class="u-container-style u-layout-cell u-size-37 u-layout-cell-2">
+                      <div class="u-container-layout u-container-layout-2">
+                        <div class="u-clearfix u-custom-html u-custom-html-2">
+                          <canvas id="payment-trends"></canvas>
+                        </div>
+                        <button id="apply-payments" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">apply filter</button>
+                        <div class="u-clearfix u-custom-html u-custom-html-3">
+                          <input id="from-date" type="date">
+                        </div>
+                        <div class="u-clearfix u-custom-html u-custom-html-4">
+                          <input id="to-date" type="date">
+                        </div>
+                        <h6 class="u-text u-text-1">Date from:</h6>
+                        <h6 class="u-text u-text-2">Date to:</h6>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="u-size-30">
-                <div class="u-layout-row">
-                  <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-3">
-                    <div class="u-container-layout u-container-layout-3">
-                      <h3 class="u-text u-text-default u-text-1">Debtors</h3>
-                      <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 650px; overflow-y: auto;">
-                        <table class="u-table-entity">
-                          <colgroup>
-                            <col width="33.3%">
-                            <col width="33.3%">
-                            <col width="33.400000000000006%">
-                          </colgroup>
-                          <thead class="u-black u-table-header u-table-header-1">
-                            <tr style="height: 21px;">
-                              <th class="u-border-1 u-border-black u-table-cell">Customer ID</th>
-                              <th class="u-border-1 u-border-black u-table-cell">Customer Name</th>
-                              <th class="u-border-1 u-border-black u-table-cell">Amount Due (ZAR)</th>
-                            </tr>
-                          </thead>
-                          <tbody id="outstanding-invoices" class="u-table-body">
-                            <tr style="height: 39px;">
+                <div class="u-size-30">
+                  <div class="u-layout-row">
+                    <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-3">
+                      <div class="u-container-layout u-container-layout-3">
+                        <h3 class="u-text u-text-default u-text-3">Outstanding Invoices</h3>
+                        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
+                          <table class="u-table-entity">
+                            <colgroup>
+                              <col width="33.3%">
+                              <col width="33.3%">
+                              <col width="33.400000000000006%">
+                            </colgroup>
+                            <thead class="u-black u-table-header u-table-header-1">
+                              <tr style="height: 21px;">
+                                <th class="u-border-1 u-border-black u-table-cell">Invoice ID</th>
+                                <th class="u-border-1 u-border-black u-table-cell">Customer Name</th>
+                                <th class="u-border-1 u-border-black u-table-cell">Amount Due (ZAR)</th>
+                              </tr>
+                            </thead>
+                            <tbody id="outstanding-invoices" class="u-table-body">
                               
-                            </tr>
-                          </tbody>
-                        </table>
+                            </tbody>
+                          </table>
+                        </div>
+                        <button id="apply-outstanding" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-2">apply filter</button>
+                        <div class="u-clearfix u-custom-html u-custom-html-5">
+                          <input id="greater-than" type="number">
+                        </div>
+                        <div class="u-clearfix u-custom-html u-custom-html-6">
+                          <input id="less-than" type="number">
+                        </div>
+                        <h6 class="u-text u-text-4">Amount&lt;</h6>
+                        <h6 class="u-text u-text-default u-text-5">Amount&gt;</h6>
                       </div>
                     </div>
                   </div>
@@ -101,8 +117,7 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>  
+      </section>  
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-00c8"><div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">SAP@J's Cupcake Company | Ncube Manelisi</p>
