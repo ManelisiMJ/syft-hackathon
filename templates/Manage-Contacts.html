@@ -79,7 +79,7 @@
     <section class="u-align-center u-clearfix u-section-2" id="sec-5d0e">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h3 class="u-text u-text-default u-text-1">Contacts</h3>
-        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1" style="max-height: 450px; overflow-y: auto;">
           <table class="u-table-entity u-table-entity-1">
             <colgroup>
               <col width="16.6%">
@@ -125,7 +125,10 @@
         </div>
         <h6 class="u-text u-text-default u-text-4">Phone</h6>
         <div class="u-clearfix u-custom-html u-custom-html-5">
-          <input id="new-is-customer" type="text">
+          <select name="new-is-customer" id="new-is-customer" style="width: 192px; height: 32px;">
+            <option value="1">True</option>
+            <option value="0">False</option>
+          </select>
         </div>
         <h6 class="u-text u-text-default u-text-5">Is_Customer</h6>
         <div class="u-clearfix u-custom-html u-custom-html-6">

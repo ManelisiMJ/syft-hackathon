@@ -19,6 +19,7 @@ appsBtn2.addEventListener("click", ()=>{
 window.location.href = `/apps`
 })
 
+let paymentsOverTimeChart = null
 let paymentsOverTimeBtn = document.getElementById("apply-payments")
 
 paymentsOverTimeBtn.addEventListener("click", ()=>{
@@ -96,6 +97,8 @@ let url = `/customer-analytics/customer-composition`    //Send request to get co
 
 
 function paymentsOverTime(condition){
+  if (paymentsOverTimeChart != null)
+        paymentsOverTimeChart.destroy()
   let url2 = `/customer-analytics/payment-trends`   //Send request to get customers' payment trends
       fetch(url2, {
       method: 'POST', 
@@ -106,7 +109,7 @@ function paymentsOverTime(condition){
       })
       .then(response => response.json())
       .then(data => {
-          new Chart("payment-trends", {     //Create chart to visualize data
+          paymentsOverTimeChart = new Chart("payment-trends", {     //Create chart to visualize data
               type: "line",
               data: {
                   labels: data[0],

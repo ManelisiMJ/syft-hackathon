@@ -394,7 +394,6 @@ def customerSegregation(condition):
     {havingClause}
     ORDER BY total_purchases DESC;
     """
-    print(query)
     results = selectFromDatabase(query)
     return extractThreeDimensions(results)
 

@@ -32,7 +32,13 @@ These are the applications/features offered by the system
 - Manage Inventory - Used to maintain inventory information, add new or edit existing stock items
 - Analytics - Analytics applications provide interactive dashboards and visualizations of the data
 
+## Technologies used
+- SQLite database
+- Flask server
+- Front-end built with HTML, JavaScript and CSS
+- Docker for deployment
+
 ## Website
-Find the website [here](http://hello.com) 
+Find the website [here](https://syft-hackathon.2mm3rks41bo6m.eu-west-2.cs.amazonlightsail.com/) 
 
 
