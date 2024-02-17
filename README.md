@@ -38,7 +38,3 @@ These are the applications/features offered by the system
 - Front-end built with HTML, JavaScript and CSS
 - Docker for deployment
 
-## Website
-Find the website [here](https://syft-hackathon.2mm3rks41bo6m.eu-west-2.cs.amazonlightsail.com/) 
-
-
